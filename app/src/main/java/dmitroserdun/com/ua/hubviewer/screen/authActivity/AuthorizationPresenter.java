@@ -2,9 +2,15 @@ package dmitroserdun.com.ua.hubviewer.screen.authActivity;
 
 import android.content.SharedPreferences;
 
+import java.io.IOException;
+
 import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import dmitroserdun.com.ua.hubviewer.network.TokenConnector;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_TOKEN_KEY;
 
@@ -30,6 +36,7 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
     public void init() {
 
     }
+
 
     @Override
     public void logIn(String login, String password) {
@@ -57,6 +64,33 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
                 }
             });
         }
+
+    }
+
+    @Override
+    public void logIn() {
+        view.showWebView();
+    }
+
+    @Override
+    public void applyTokenByCode(String code) {
+        final String ACCESS_TOKEN = "access_token=";
+        TokenConnector.getToken(code, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseString = response.body().string();
+                String token = responseString.substring(ACCESS_TOKEN.length(),responseString.indexOf("&"));
+                if (response != null) {
+                    pref.edit().putString(CURRENT_TOKEN_KEY, token).apply();
+                    view.hideLoadingView();
+                    view.openProfile();
+                }
+            }
+        });
 
     }
 
