@@ -34,13 +34,11 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
                 @Override
                 public void onLoaded(Authorization o) {
                     Authorization authorization = o;
-                    int d=4;
                 }
 
                 @Override
                 public void onFailure(String e) {
                     String f = e;
-                    int f3=3;
                 }
             });
         }
