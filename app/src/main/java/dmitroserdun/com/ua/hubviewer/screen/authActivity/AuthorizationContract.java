@@ -8,7 +8,7 @@ import dmitroserdun.com.ua.hubviewer.screen.BaseView;
 
 public class AuthorizationContract {
     interface View extends BaseView<Presenter> {
-        void openRepositories();
+        void openProfile();
 
         void showLoginError();
 

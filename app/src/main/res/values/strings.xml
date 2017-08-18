@@ -4,6 +4,12 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+
+    //activity auth
+
+    <string name="incorrect_identification_data">Incorrect identification data</string>
+
+
+
 </resources>

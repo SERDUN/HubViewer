@@ -5,6 +5,6 @@ package dmitroserdun.com.ua.hubviewer.screen;
  */
 
 public interface LoadingView {
-    public void showLoadingView();
+    public void showLoadingView(String msg);
     public void hideLoadingView();
 }
