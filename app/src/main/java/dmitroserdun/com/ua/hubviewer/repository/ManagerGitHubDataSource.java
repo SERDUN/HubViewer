@@ -15,7 +15,7 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     private static ManagerGitHubDataSource INSTANCE = null;
     private final LocalGitHubDataSource localRepository;
     private final RemoteGitHubDataSource remoteRepository;
-    private boolean useLocaleDataSource = false;
+    private boolean useRemoteDataSource = false;
 
     public ManagerGitHubDataSource(@NonNull LocalGitHubDataSource localRepository, @NonNull RemoteGitHubDataSource remoteRepository) {
         this.localRepository = localRepository;
@@ -23,7 +23,7 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     public static ManagerGitHubDataSource getInstance(LocalGitHubDataSource localRepository,
-                                               RemoteGitHubDataSource remoteRepository) {
+                                                      RemoteGitHubDataSource remoteRepository) {
         if (INSTANCE == null) {
             INSTANCE = new ManagerGitHubDataSource(localRepository, remoteRepository);
         }
@@ -40,7 +40,11 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getCurrentUser(@NonNull Callback callback) {
+    public void getCurrentUser(String token, @NonNull Callback callback) {
+        if (useRemoteDataSource) {
+            remoteRepository.getCurrentUser(token, callback);
+            useRemoteDataSource = false;
+        } else localRepository.getCurrentUser(token, callback);
 
     }
 
@@ -66,7 +70,7 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void refreshLocalData() {
-        useLocaleDataSource = true;
+        useRemoteDataSource = true;
 
     }
 }

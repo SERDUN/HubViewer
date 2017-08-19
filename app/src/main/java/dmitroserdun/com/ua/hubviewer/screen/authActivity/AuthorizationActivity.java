@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import dmitroserdun.com.ua.hubviewer.R;
@@ -27,7 +26,6 @@ public class AuthorizationActivity extends AppCompatActivity implements View {
     private AuthorizationContract.Presenter presenter;
     private LoadingView loadingView;
 
-    TextView t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +34,7 @@ public class AuthorizationActivity extends AppCompatActivity implements View {
         new AuthorizationPresenter(this, Injection.provideTasksRepository(this),
                 getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE));
         initView();
-        t=(TextView)findViewById(R.id.textView4);
-        presenter.logIn();
+        presenter.checkAuthorization();
     }
 
     private void initView() {
@@ -60,7 +57,7 @@ public class AuthorizationActivity extends AppCompatActivity implements View {
 
 
     @Override
-    public void openProfile() {
+    public void openOverview() {
         startActivity(new Intent(this, NavigationActivity.class));
         finish();
     }

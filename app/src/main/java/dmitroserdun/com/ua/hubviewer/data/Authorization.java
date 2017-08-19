@@ -24,4 +24,6 @@ public class Authorization {
     public void setToken(String token) {
         mToken = token;
     }
+
+
 }

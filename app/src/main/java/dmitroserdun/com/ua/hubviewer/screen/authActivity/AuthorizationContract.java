@@ -8,7 +8,7 @@ import dmitroserdun.com.ua.hubviewer.screen.BaseView;
 
 public class AuthorizationContract {
     interface View extends BaseView<Presenter> {
-        void openProfile();
+        void openOverview();
 
         void showWebView();
 
@@ -38,6 +38,8 @@ public class AuthorizationContract {
         public void logIn();
 
         public void applyTokenByCode(String code);
+
+        public void checkAuthorization();
 
 
     }

@@ -8,6 +8,7 @@ import dmitroserdun.com.ua.hubviewer.data.Authorization;
 import dmitroserdun.com.ua.hubviewer.network.TokenConnector;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
+import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -52,7 +53,7 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
                     if (o != null) {
                         pref.edit().putString(CURRENT_TOKEN_KEY, o.getToken()).apply();
                         view.hideLoadingView();
-                        view.openProfile();
+                        view.openOverview();
                     } else {
                         notifyUser("Incorrect identification data");
                     }
@@ -83,16 +84,28 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
-                String token = responseString.substring(ACCESS_TOKEN.length(),responseString.indexOf("&"));
+                String token = responseString.substring(ACCESS_TOKEN.length(), responseString.indexOf("&"));
                 if (response != null) {
                     pref.edit().putString(CURRENT_TOKEN_KEY, token).apply();
                     view.hideLoadingView();
-                    view.openProfile();
+                    view.openOverview();
                 }
             }
         });
 
     }
+
+    @Override
+    public void checkAuthorization() {
+        if (pref.getString(Constance.CURRENT_TOKEN_KEY, "").isEmpty())
+        {
+            logIn();
+        }else {
+            view.openOverview();
+        }
+
+    }
+
 
     private void notifyUser(String msg) {
         view.hideLoadingView();

@@ -27,7 +27,7 @@ public class LocalGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getCurrentUser(@NonNull Callback callback) {
+    public void getCurrentUser(String token, @NonNull Callback callback) {
 
     }
 

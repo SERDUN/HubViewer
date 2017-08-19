@@ -3,10 +3,13 @@ package dmitroserdun.com.ua.hubviewer.network;
 import com.google.gson.JsonObject;
 
 import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by User on 17.08.2017.
@@ -18,8 +21,7 @@ public interface GitHubApiService {
     public Call<Authorization> authorize(@Header("Authorization") String authorization,
                                          @Body JsonObject params);
 
-//    @GET("/user/repos")
-//    public Call<List<GitHubDataSource>> repositories();
-
+    @GET("/user")
+    public Call<User> getCurrentUser(@Query("access_token") String token);
 
 }

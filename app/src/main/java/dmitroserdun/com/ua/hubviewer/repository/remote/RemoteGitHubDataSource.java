@@ -3,6 +3,7 @@ package dmitroserdun.com.ua.hubviewer.repository.remote;
 import android.support.annotation.NonNull;
 
 import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.User;
 import dmitroserdun.com.ua.hubviewer.network.GitGubNetworkFactory;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.utils.BasicAuthUtils;
@@ -45,7 +46,21 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getCurrentUser(@NonNull Callback callback) {
+    public void getCurrentUser(String token, @NonNull Callback<User> callback) {
+        Call<User> user = GitGubNetworkFactory.getService().getCurrentUser(token);
+        user.enqueue(new retrofit2.Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                callback.onLoaded(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+
+            }
+        });
 
     }
 

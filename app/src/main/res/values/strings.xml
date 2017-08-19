@@ -9,7 +9,14 @@
     //activity auth
 
     <string name="incorrect_identification_data">Incorrect identification data</string>
+    <string name="full_name">Full name</string>
+    <string name="login">Login</string>
 
+    <string name="repository">repository</string>
+    <string name="overview">overview</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

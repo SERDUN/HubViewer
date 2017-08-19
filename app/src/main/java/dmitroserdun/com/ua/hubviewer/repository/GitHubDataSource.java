@@ -3,6 +3,7 @@ package dmitroserdun.com.ua.hubviewer.repository;
 import android.support.annotation.NonNull;
 
 import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.User;
 
 /**
  * Created by User on 17.08.2017.
@@ -19,7 +20,7 @@ public interface GitHubDataSource {
 
     void authentication(String login, String password, @NonNull Callback<Authorization> callback);
 
-    void getCurrentUser(@NonNull Callback callback);
+    void getCurrentUser(String token, @NonNull Callback<User> callback);
 
     void getUser(String username, @NonNull Callback callback);
 
