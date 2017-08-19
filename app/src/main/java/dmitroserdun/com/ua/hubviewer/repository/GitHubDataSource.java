@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.model.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.User;
 
@@ -32,7 +33,7 @@ public interface GitHubDataSource {
 
     void getRepositories(String username, @NonNull Callback<List<Repository>> callback);
 
-    void searchRepository(String name, @NonNull Callback callback);
+    void searchRepository(String name, @NonNull Callback<Page> callback);
 
     void refreshLocalData();
 }

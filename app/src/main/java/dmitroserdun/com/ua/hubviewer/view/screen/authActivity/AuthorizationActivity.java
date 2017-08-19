@@ -16,7 +16,7 @@ import dmitroserdun.com.ua.hubviewer.view.screen.authActivity.AuthorizationContr
 import dmitroserdun.com.ua.hubviewer.view.screen.navigationActivity.NavigationActivity;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.utils.OauthUtils;
-import dmitroserdun.com.ua.hubviewer.utils.view.LoadingDialog;
+import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 

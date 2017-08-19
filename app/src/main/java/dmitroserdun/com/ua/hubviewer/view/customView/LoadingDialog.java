@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.utils.view;
+package dmitroserdun.com.ua.hubviewer.view.customView;
 
 import android.app.Dialog;
 import android.os.Bundle;

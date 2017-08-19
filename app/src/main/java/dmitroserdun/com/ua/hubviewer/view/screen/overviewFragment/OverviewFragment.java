@@ -21,6 +21,9 @@ import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 
 public class OverviewFragment extends Fragment implements OverviewContract.View {
 
+
+    public static final String OVERVIEW_FRAGMENT_KEY = OverviewFragment.class.getName();
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -157,6 +160,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
 
 
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

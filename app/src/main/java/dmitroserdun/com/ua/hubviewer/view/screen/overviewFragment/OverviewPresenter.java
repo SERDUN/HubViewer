@@ -6,6 +6,7 @@ import dmitroserdun.com.ua.hubviewer.data.model.User;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 
+import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_FULL_NAME;
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_TOKEN_KEY;
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_USERNAME;
 
@@ -52,5 +53,6 @@ public class OverviewPresenter implements OverviewContract.Presenter {
 
     private void saveLoginUserForRequest(User user) {
         pref.edit().putString(CURRENT_USERNAME, user.getLogin()).apply();
+        pref.edit().putString(CURRENT_FULL_NAME, user.getName()).apply();
     }
 }

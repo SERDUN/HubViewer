@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.model.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.User;
 import retrofit2.Call;
@@ -30,5 +31,8 @@ public interface GitHubApiService {
 
     @GET("/users/{username}/repos")
     public Call<List<Repository>> getUserRepository(@Path("username") String username);
+
+    @GET("/search/repositories")
+    public Call<Page> getSearchRepository(@Query("q") String q);
 
 }

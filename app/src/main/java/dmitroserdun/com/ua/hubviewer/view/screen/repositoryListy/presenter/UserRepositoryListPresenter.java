@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy;
+package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter;
 
 import android.content.SharedPreferences;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListContract;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_USERNAME;
 
@@ -14,14 +15,14 @@ import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_USERNAME;
  * Created by User on 19.08.2017.
  */
 
-public class RepositoryListPresenter implements RepositoryListContract.Presenter {
+public class UserRepositoryListPresenter implements RepositoryListContract.Presenter {
     private RepositoryListContract.View view;
     private ManagerGitHubDataSource managerGitHubDataSource;
     private SharedPreferences pref;
 
-    public RepositoryListPresenter(RepositoryListContract.View view,
-                                   ManagerGitHubDataSource managerGitHubDataSource,
-                                   SharedPreferences pref) {
+    public UserRepositoryListPresenter(RepositoryListContract.View view,
+                                       ManagerGitHubDataSource managerGitHubDataSource,
+                                       SharedPreferences pref) {
         this.view = view;
         view.setPresenter(this);//register view
         this.managerGitHubDataSource = managerGitHubDataSource;
@@ -43,6 +44,11 @@ public class RepositoryListPresenter implements RepositoryListContract.Presenter
 
             }
         });
+
+    }
+
+    @Override
+    public void search(String q) {
 
     }
 

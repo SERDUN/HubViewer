@@ -5,17 +5,32 @@
         android:id="@+id/menu_top">
 
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_overview"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="@string/overview" />
+
+        <item
+            android:id="@+id/nav_stars"
+            android:icon="@drawable/star_icon"
+            android:title="@string/stars" />
+
+        <item
+            android:id="@+id/nav_followers"
+            android:icon="@drawable/icon_follower"
+            android:title="@string/Followers" />
+        <item
+            android:id="@+id/nav_following"
+            android:icon="@drawable/icon_following"
+            android:title="@string/Following" />
 
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/mendu_top">
         <item
-            android:id="@+id/nav_ceamera"
-            android:title="Import" />
+            android:icon="@drawable/ic_search_black_24dp"
+            android:id="@+id/nav_search"
+            android:title="@string/search_git_hub" />
 
     </group>
 

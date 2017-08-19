@@ -21,10 +21,12 @@ public interface RepositoryListContract {
 
 
 
+
     }
 
     interface Presenter {
         public void loadRepository();
+        public void search(String q);
 
     }
 }

@@ -72,8 +72,8 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void searchRepository(String name, @NonNull Callback callback) {
-
+    public void searchRepository(String q, @NonNull Callback callback) {
+        remoteRepository.searchRepository(q, callback);
     }
 
     @Override

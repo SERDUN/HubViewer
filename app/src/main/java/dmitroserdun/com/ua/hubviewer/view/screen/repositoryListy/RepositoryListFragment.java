@@ -1,12 +1,15 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy;
 
+import android.app.SearchManager;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,37 +18,32 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
-import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.view.adapter.RecyclerListAdapter;
-
-import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
+import dmitroserdun.com.ua.hubviewer.view.customView.RecyclerViewEmptySupport;
 
 
 public class RepositoryListFragment extends Fragment implements RepositoryListContract.View {
+    public static final String REPOSITORY_LIST_FRAGMENT_KEY = RepositoryListFragment.class.getName();
+
+
     private static final String ARG_PARAM2 = "param2";
+
 
     private String mParam1;
     private String mParam2;
 
+
+
     private RepositoryListContract.Presenter presenter;
-    private RecyclerView recyclerView;
+    private RecyclerViewEmptySupport recyclerView;
+    private View emptyView;
 
-
-    private OnFragmentInteractionListener mListener;
 
     public RepositoryListFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RepositoryListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static RepositoryListFragment newInstance(String param1, String param2) {
         RepositoryListFragment fragment = new RepositoryListFragment();
         Bundle args = new Bundle();
@@ -60,6 +58,8 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
         if (getArguments() != null) {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -67,15 +67,15 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repository_list, container, false);
         initView(view);
-        new RepositoryListPresenter(this, Injection.provideTasksRepository(getContext()),
-                getContext().getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE));
         presenter.loadRepository();
         return view;
     }
 
     //// TODO: 19.08.2017 rewrite us cursor
     private void initView(View view) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_repository);
+        recyclerView = (RecyclerViewEmptySupport) view.findViewById(R.id.rv_repository);
+        emptyView = view.findViewById(R.id.tv_empty);
+        recyclerView.setEmptyView(emptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new RecyclerListAdapter(v -> {
         }, new ArrayList<Repository>()));
@@ -116,22 +116,35 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
 
     @Override
     public void showRepository(List<Repository> repositories) {
-
-        ( (RecyclerListAdapter)recyclerView.getAdapter()).swapList((ArrayList<Repository>) repositories);
+        ((RecyclerListAdapter) recyclerView.getAdapter()).swapList((ArrayList<Repository>) repositories);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.navigation, menu);
+
+        SearchManager manager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+
+        SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+//        search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("search_sss", "onQueryTextSubmit: " + query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                presenter.search(newText);
+                Log.d("search_sss", "onQueryTextSubmit: " + newText);
+
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
+
 }

@@ -12,8 +12,13 @@
     <string name="full_name">Full name</string>
     <string name="login">Login</string>
 
-    <string name="repository">repository</string>
-    <string name="overview">overview</string>
+    <string name="overview">Overview</string>
+    <string name="repository">Repository</string>
+    <string name="stars">Stars</string>
+    <string name="Followers">Overview</string>
+    <string name="Following">Overview</string>
+    <string name="list_empty">The list is empty</string>
+    <string name="search_git_hub">Search GitHub</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
