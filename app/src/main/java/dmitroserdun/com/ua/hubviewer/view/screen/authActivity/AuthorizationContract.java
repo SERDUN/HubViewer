@@ -1,6 +1,6 @@
-package dmitroserdun.com.ua.hubviewer.screen.authActivity;
+package dmitroserdun.com.ua.hubviewer.view.screen.authActivity;
 
-import dmitroserdun.com.ua.hubviewer.screen.BaseView;
+import dmitroserdun.com.ua.hubviewer.view.screen.BaseView;
 
 /**
  * Created by User on 17.08.2017.

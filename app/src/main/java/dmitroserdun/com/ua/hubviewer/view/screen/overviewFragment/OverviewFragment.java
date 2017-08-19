@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.screen.overviewFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.data.User;
+import dmitroserdun.com.ua.hubviewer.data.model.User;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;

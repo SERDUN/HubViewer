@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.data;
+package dmitroserdun.com.ua.hubviewer.data.model;
 
 import com.google.gson.annotations.SerializedName;
 

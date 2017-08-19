@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="dmitroserdun.com.ua.hubviewer.screen.overviewFragment.OverviewFragment">
+        tools:context=".view.screen.overviewFragment.OverviewFragment">
 
         <!-- TODO: Update blank fragment layout -->
 

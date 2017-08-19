@@ -2,7 +2,10 @@ package dmitroserdun.com.ua.hubviewer.repository;
 
 import android.support.annotation.NonNull;
 
-import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.local.LocalGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.remote.RemoteGitHubDataSource;
 
@@ -59,7 +62,12 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getRepositories(String username, @NonNull Callback callback) {
+    public void getRepositories(String username, @NonNull Callback<List<Repository>> callback) {
+        if (useRemoteDataSource) {
+            remoteRepository.getRepositories(username, callback);
+            useRemoteDataSource = false;
+        } else localRepository.getRepositories(username, callback);
+
 
     }
 

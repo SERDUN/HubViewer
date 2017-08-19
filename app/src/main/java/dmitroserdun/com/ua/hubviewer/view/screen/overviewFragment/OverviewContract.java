@@ -1,7 +1,7 @@
-package dmitroserdun.com.ua.hubviewer.screen.overviewFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
-import dmitroserdun.com.ua.hubviewer.data.User;
-import dmitroserdun.com.ua.hubviewer.screen.BaseView;
+import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.view.screen.BaseView;
 
 /**
  * Created by User on 19.08.2017.

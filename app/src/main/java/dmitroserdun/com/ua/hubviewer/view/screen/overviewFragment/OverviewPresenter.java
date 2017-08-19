@@ -1,12 +1,13 @@
-package dmitroserdun.com.ua.hubviewer.screen.overviewFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
 import android.content.SharedPreferences;
 
-import dmitroserdun.com.ua.hubviewer.data.User;
+import dmitroserdun.com.ua.hubviewer.data.model.User;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_TOKEN_KEY;
+import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_USERNAME;
 
 /**
  * Created by User on 19.08.2017.
@@ -31,8 +32,9 @@ public class OverviewPresenter implements OverviewContract.Presenter {
         managerGitHubDataSource.refreshLocalData();
         managerGitHubDataSource.getCurrentUser(getToken(), new GitHubDataSource.Callback<User>() {
             @Override
-            public void onLoaded(User o) {
-                view.showOverviewData(o);
+            public void onLoaded(User user) {
+                view.showOverviewData(user);
+                saveLoginUserForRequest(user);
             }
 
             @Override
@@ -43,8 +45,12 @@ public class OverviewPresenter implements OverviewContract.Presenter {
 
     }
 
-    private String getToken(){
-               return pref.getString(CURRENT_TOKEN_KEY, "");
+    private String getToken() {
+        return pref.getString(CURRENT_TOKEN_KEY, "");
 
+    }
+
+    private void saveLoginUserForRequest(User user) {
+        pref.edit().putString(CURRENT_USERNAME, user.getLogin()).apply();
     }
 }

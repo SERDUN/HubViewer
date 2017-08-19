@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dmitroserdun.com.ua.hubviewer.screen.repositoryListy.RepositoryListFragment">
+    tools:context=".view.screen.repositoryListy.RepositoryListFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_repository"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.screen.authActivity;
+package dmitroserdun.com.ua.hubviewer.view.screen.authActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +11,9 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.screen.LoadingView;
-import dmitroserdun.com.ua.hubviewer.screen.authActivity.AuthorizationContract.View;
-import dmitroserdun.com.ua.hubviewer.screen.navigationActivity.NavigationActivity;
+import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
+import dmitroserdun.com.ua.hubviewer.view.screen.authActivity.AuthorizationContract.View;
+import dmitroserdun.com.ua.hubviewer.view.screen.navigationActivity.NavigationActivity;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.utils.OauthUtils;
 import dmitroserdun.com.ua.hubviewer.utils.view.LoadingDialog;

@@ -3,6 +3,9 @@ package dmitroserdun.com.ua.hubviewer.repository.local;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 
 /**
@@ -42,7 +45,7 @@ public class LocalGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getRepositories(String username, @NonNull Callback callback) {
+    public void getRepositories(String username, @NonNull Callback<List<Repository>> callback) {
 
     }
 

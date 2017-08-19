@@ -1,10 +1,10 @@
-package dmitroserdun.com.ua.hubviewer.screen.authActivity;
+package dmitroserdun.com.ua.hubviewer.view.screen.authActivity;
 
 import android.content.SharedPreferences;
 
 import java.io.IOException;
 
-import dmitroserdun.com.ua.hubviewer.data.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.network.TokenConnector;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;

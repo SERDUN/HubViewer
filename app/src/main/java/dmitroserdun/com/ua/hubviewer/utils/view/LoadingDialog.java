@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.screen.LoadingView;
+import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 
 /**
  * Created by User on 18.08.2017.

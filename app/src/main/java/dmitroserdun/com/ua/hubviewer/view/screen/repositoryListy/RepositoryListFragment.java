@@ -1,32 +1,35 @@
-package dmitroserdun.com.ua.hubviewer.screen.repositoryListy;
+package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dmitroserdun.com.ua.hubviewer.R;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RepositoryListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RepositoryListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class RepositoryListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+import dmitroserdun.com.ua.hubviewer.R;
+import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.utils.Injection;
+import dmitroserdun.com.ua.hubviewer.view.adapter.RecyclerListAdapter;
+
+import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
+
+
+public class RepositoryListFragment extends Fragment implements RepositoryListContract.View {
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RepositoryListContract.Presenter presenter;
+    private RecyclerView recyclerView;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,7 +49,6 @@ public class RepositoryListFragment extends Fragment {
     public static RepositoryListFragment newInstance(String param1, String param2) {
         RepositoryListFragment fragment = new RepositoryListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +58,6 @@ public class RepositoryListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -64,32 +65,59 @@ public class RepositoryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repository_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_repository_list, container, false);
+        initView(view);
+        new RepositoryListPresenter(this, Injection.provideTasksRepository(getContext()),
+                getContext().getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE));
+        presenter.loadRepository();
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    //// TODO: 19.08.2017 rewrite us cursor
+    private void initView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv_repository);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new RecyclerListAdapter(v -> {
+        }, new ArrayList<Repository>()));
+
+    }
+
+
+    @Override
+    public void showLoadingView(String msg) {
+
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+    public void hideLoadingView() {
+
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void setPresenter(RepositoryListContract.Presenter presenter) {
+        this.presenter = presenter;
+
+    }
+
+    @Override
+    public void showLoginError() {
+
+    }
+
+    @Override
+    public void showMessage(String s) {
+
+    }
+
+    @Override
+    public void showPasswordError() {
+
+    }
+
+    @Override
+    public void showRepository(List<Repository> repositories) {
+
+        ( (RecyclerListAdapter)recyclerView.getAdapter()).swapList((ArrayList<Repository>) repositories);
     }
 
     /**

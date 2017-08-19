@@ -2,8 +2,11 @@ package dmitroserdun.com.ua.hubviewer.repository.remote;
 
 import android.support.annotation.NonNull;
 
-import dmitroserdun.com.ua.hubviewer.data.Authorization;
-import dmitroserdun.com.ua.hubviewer.data.User;
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
+import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.User;
 import dmitroserdun.com.ua.hubviewer.network.GitGubNetworkFactory;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.utils.BasicAuthUtils;
@@ -75,8 +78,21 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getRepositories(String username, @NonNull Callback callback) {
+    public void getRepositories(String username, @NonNull Callback<List<Repository>> callback) {
+        Call<List<Repository>> repository = GitGubNetworkFactory.getService().getUserRepository(username);
+        repository.enqueue(new retrofit2.Callback<List<Repository>>() {
+            @Override
+            public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
+                callback.onLoaded(response.body());
 
+            }
+
+            @Override
+            public void onFailure(Call<List<Repository>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+
+            }
+        });
     }
 
     @Override

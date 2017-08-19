@@ -7,4 +7,5 @@ package dmitroserdun.com.ua.hubviewer.utils;
 public class Constance {
     public static final String TOKEN_KEY = "token_key";
     public static final String CURRENT_TOKEN_KEY = "current_token_key";
+    public static final String CURRENT_USERNAME = "current_username";
 }

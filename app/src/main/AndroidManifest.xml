@@ -15,12 +15,12 @@
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".screen.navigationActivity.NavigationActivity"
+            android:name=".view.screen.navigationActivity.NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".screen.authActivity.AuthorizationActivity">
+        <activity android:name=".view.screen.authActivity.AuthorizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

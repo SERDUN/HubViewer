@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.screen.usersDetailsTabFragment;
+package dmitroserdun.com.ua.hubviewer.view.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

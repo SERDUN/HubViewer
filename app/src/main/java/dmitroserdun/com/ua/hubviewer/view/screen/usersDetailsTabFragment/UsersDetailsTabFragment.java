@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.screen.usersDetailsTabFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.usersDetailsTabFragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.screen.overviewFragment.OverviewFragment;
-import dmitroserdun.com.ua.hubviewer.screen.repositoryListy.RepositoryListFragment;
+import dmitroserdun.com.ua.hubviewer.view.adapter.ViewPageAdapter;
+import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewFragment;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListFragment;
 
 public class UsersDetailsTabFragment extends Fragment {
 
