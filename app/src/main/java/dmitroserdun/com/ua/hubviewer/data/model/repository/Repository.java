@@ -1,10 +1,14 @@
 
-package dmitroserdun.com.ua.hubviewer.data.model;
+package dmitroserdun.com.ua.hubviewer.data.model.repository;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RepositoryDetails {
+import java.io.Serializable;
+
+import dmitroserdun.com.ua.hubviewer.data.model.user.Owner;
+
+public class Repository  implements Serializable{
 
     @SerializedName("id")
     @Expose
@@ -20,7 +24,7 @@ public class RepositoryDetails {
     private Owner owner;
     @SerializedName("private")
     @Expose
-    private Boolean privateRepo;
+    private Boolean _private;
     @SerializedName("html_url")
     @Expose
     private String htmlUrl;
@@ -213,12 +217,6 @@ public class RepositoryDetails {
     @SerializedName("default_branch")
     @Expose
     private String defaultBranch;
-    @SerializedName("network_count")
-    @Expose
-    private Integer networkCount;
-    @SerializedName("subscribers_count")
-    @Expose
-    private Integer subscribersCount;
 
     public Integer getId() {
         return id;
@@ -253,11 +251,11 @@ public class RepositoryDetails {
     }
 
     public Boolean getPrivate() {
-        return privateRepo;
+        return _private;
     }
 
     public void setPrivate(Boolean _private) {
-        this.privateRepo = _private;
+        this._private = _private;
     }
 
     public String getHtmlUrl() {
@@ -770,22 +768,6 @@ public class RepositoryDetails {
 
     public void setDefaultBranch(String defaultBranch) {
         this.defaultBranch = defaultBranch;
-    }
-
-    public Integer getNetworkCount() {
-        return networkCount;
-    }
-
-    public void setNetworkCount(Integer networkCount) {
-        this.networkCount = networkCount;
-    }
-
-    public Integer getSubscribersCount() {
-        return subscribersCount;
-    }
-
-    public void setSubscribersCount(Integer subscribersCount) {
-        this.subscribersCount = subscribersCount;
     }
 
 }

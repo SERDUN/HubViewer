@@ -6,10 +6,11 @@ import android.util.Log;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
-import dmitroserdun.com.ua.hubviewer.data.model.Page;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
-import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
-import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.network.GitGubNetworkFactory;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.utils.BasicAuthUtils;
@@ -134,6 +135,23 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             }
         });
+    }
+
+    @Override
+    public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> callback) {
+        Call<List<Directory>> repositoryDetailsCall = GitGubNetworkFactory.getService().getDirectory(name, reponame,path);
+       repositoryDetailsCall.enqueue(new retrofit2.Callback<List<Directory>>() {
+           @Override
+           public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
+               callback.onLoaded(response.body());
+
+           }
+
+           @Override
+           public void onFailure(Call<List<Directory>> call, Throwable t) {
+
+           }
+       });
     }
 
 

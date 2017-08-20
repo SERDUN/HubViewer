@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
-import dmitroserdun.com.ua.hubviewer.data.model.Page;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
-import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
-import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 
 /**
  * Created by User on 17.08.2017.
@@ -35,6 +36,8 @@ public interface GitHubDataSource {
     void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback);
 
     void searchRepository(String name, @NonNull Callback<Page> callback);
+
+    void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call);
 
     void refreshLocalData();
 }

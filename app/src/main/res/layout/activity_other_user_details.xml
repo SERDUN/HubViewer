@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/other_user_container"
-    tools:context="dmitroserdun.com.ua.hubviewer.view.screen.usersDetailsTabFragment.OtherUserDetailsActivity">
+    tools:context="dmitroserdun.com.ua.hubviewer.view.screen.containers.OtherUserDetailsActivity">
 
 </FrameLayout>

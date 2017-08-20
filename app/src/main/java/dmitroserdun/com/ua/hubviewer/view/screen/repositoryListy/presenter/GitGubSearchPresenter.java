@@ -2,8 +2,8 @@ package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter;
 
 import android.content.SharedPreferences;
 
-import dmitroserdun.com.ua.hubviewer.data.model.Page;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListContract;

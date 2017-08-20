@@ -1,7 +1,5 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter;
 
-import dmitroserdun.com.ua.hubviewer.data.model.User;
-import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewContract;
 

@@ -5,28 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    z
+
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardElevation="2dp"
+        card_view:cardElevation="3dp"
+        android:paddingBottom="@dimen/small_padding"
         card_view:cardUseCompatPadding="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/tv_repo_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
+                android:paddingBottom="@dimen/text_margin"
                 android:text="Repo Name"
                 card_view:layout_constraintHorizontal_bias="0.0"
                 card_view:layout_constraintLeft_toLeftOf="parent"
@@ -35,56 +38,32 @@
 
             <TextView
                 android:id="@+id/tv_repo_description"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/tv_repo_name"
                 android:layout_alignLeft="@+id/tv_repo_name"
                 android:layout_alignRight="@+id/tv_repo_name"
                 android:layout_alignStart="@+id/tv_repo_name"
                 android:layout_below="@+id/tv_repo_name"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
                 android:text="description"
                 card_view:layout_constraintLeft_toLeftOf="@+id/tv_repo_name"
                 card_view:layout_constraintRight_toRightOf="@+id/tv_repo_name"
                 card_view:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/tv_repo_description"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintHorizontal_bias="0.995"
-                card_view:layout_constraintLeft_toLeftOf="parent"
-                card_view:layout_constraintRight_toRightOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="1.0">
+            <TextView
+                android:id="@+id/tv_repo_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1046.73"
+                android:gravity="right"
+                android:text="language"
+                android:textSize="@dimen/normal_text_size" />
 
-                <ImageView
-
-                    android:id="@+id/iv_status"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="right"
-                    android:layout_margin="5dp"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    card_view:srcCompat="@drawable/language_other_oval"
-                    tools:layout_editor_absoluteX="260dp"
-                    tools:layout_editor_absoluteY="75dp" />
-
-                <TextView
-                    android:id="@+id/tv_repo_language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="language"
-                    android:textSize="@dimen/small_text_size" />
-
-            </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 

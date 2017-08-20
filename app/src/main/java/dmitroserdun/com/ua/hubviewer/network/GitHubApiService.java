@@ -5,10 +5,11 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
-import dmitroserdun.com.ua.hubviewer.data.model.Page;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
-import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
-import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -44,5 +45,8 @@ public interface GitHubApiService {
 
     @GET("/repos/{username}/{reponame}")
     public Call<RepositoryDetails> getDetailsRepository(@Path("username") String username,@Path("reponame") String reponame);
+
+    @GET("/repos/{username}/{reponame}/contents/{dir}")
+    public Call<List<Directory>> getDirectory(@Path("username") String username, @Path("reponame") String reponame,@Path("dir") String dir);
 
 }

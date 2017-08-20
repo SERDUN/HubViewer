@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.usersDetailsTabFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.containers;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;

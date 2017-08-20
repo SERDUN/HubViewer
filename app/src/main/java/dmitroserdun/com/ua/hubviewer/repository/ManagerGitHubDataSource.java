@@ -5,9 +5,10 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
-import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
-import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.repository.local.LocalGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.remote.RemoteGitHubDataSource;
 
@@ -76,6 +77,11 @@ remoteRepository.getCurrentUserRepositories(token,callback);
     @Override
     public void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback) {
         remoteRepository.getDetailsRepositories(username,reponame,callback);
+    }
+
+    @Override
+    public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call) {
+        remoteRepository.getContentForDirectory(name,reponame,path,call);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.view.listener.RecyclerViewListener;
 
 /**

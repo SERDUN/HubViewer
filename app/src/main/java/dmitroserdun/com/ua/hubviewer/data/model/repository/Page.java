@@ -1,5 +1,5 @@
 
-package dmitroserdun.com.ua.hubviewer.data.model;
+package dmitroserdun.com.ua.hubviewer.data.model.repository;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

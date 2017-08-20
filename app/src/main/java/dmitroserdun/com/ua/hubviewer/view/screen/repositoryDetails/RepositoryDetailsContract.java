@@ -1,7 +1,10 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails;
 
-import dmitroserdun.com.ua.hubviewer.data.model.Owner;
-import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.user.Owner;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.view.screen.BaseView;
 
 /**
@@ -16,6 +19,8 @@ public class RepositoryDetailsContract {
 
         void showPasswordError();
 
+        void showContent(List<Directory> directory);
+
         void showRepoDetails(RepositoryDetails repositoryDetails);
 
 
@@ -23,6 +28,9 @@ public class RepositoryDetailsContract {
 
     interface Presenter {
         public Owner getOwner();
+
+        public void loadRepositoryContent(String path);
+
         public void loadDetails();
 
     }

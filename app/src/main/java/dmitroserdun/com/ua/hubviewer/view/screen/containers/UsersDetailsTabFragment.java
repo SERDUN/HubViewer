@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.usersDetailsTabFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.containers;
 
 import android.content.Context;
 import android.content.SharedPreferences;

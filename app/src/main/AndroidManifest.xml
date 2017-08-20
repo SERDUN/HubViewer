@@ -13,7 +13,7 @@
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".view.screen.navigationActivity.NavigationActivity"
+            android:name=".view.screen.containers.NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.screen.authActivity.AuthorizationActivity">
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.screen.repositoryDetails.RepositoryDetailsActivity" />
-        <activity android:name=".view.screen.usersDetailsTabFragment.OtherUserDetailsActivity"></activity>
+        <activity android:name=".view.screen.containers.OtherUserDetailsActivity"></activity>
     </application>
 
 </manifest>

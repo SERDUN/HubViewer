@@ -12,7 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GitGubNetworkFactory {
     private static GitHubApiService service;
     private static OkHttpClient okHttpClient;
+    private static GitHubInterceptor interceptor;
 
+    public static void setInterceptorAccessToken(String token) {
+        interceptor = new GitHubInterceptor(token);
+    }
 
     public static GitHubApiService getService() {
         GitHubApiService currentService = service;
@@ -28,11 +32,18 @@ public class GitGubNetworkFactory {
 
 
     private static Retrofit getRetrofitBuilder() {
-        return new Retrofit.Builder()
-//                .client(getOkHttpClient())
+        Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BuildConfig.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create());
+        if (interceptor != null) {
+            synchronized (GitHubApiService.class) {
+                if (interceptor != null) {
+                    builder.client(getOkHttpClient());
+                }
+            }
+        }
+        return builder.build();
+
     }
 
     private static OkHttpClient getOkHttpClient() {
@@ -50,6 +61,6 @@ public class GitGubNetworkFactory {
 
     private static OkHttpClient buildOkHttpClient() {
         return new OkHttpClient.Builder()
-                .addInterceptor(new GitHubInterceptor()).build();
+                .addInterceptor(interceptor).build();
     }
 }

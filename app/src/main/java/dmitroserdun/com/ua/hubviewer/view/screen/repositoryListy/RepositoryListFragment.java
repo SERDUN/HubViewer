@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.view.adapter.RecyclerListAdapter;
 import dmitroserdun.com.ua.hubviewer.view.customView.RecyclerViewEmptySupport;

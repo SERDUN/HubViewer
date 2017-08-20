@@ -2,7 +2,7 @@ package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter;
 
 import android.content.SharedPreferences;
 
-import dmitroserdun.com.ua.hubviewer.data.model.User;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewContract;
 

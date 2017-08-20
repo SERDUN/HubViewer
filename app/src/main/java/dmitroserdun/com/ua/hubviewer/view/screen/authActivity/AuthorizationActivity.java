@@ -13,7 +13,7 @@ import android.widget.Toast;
 import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 import dmitroserdun.com.ua.hubviewer.view.screen.authActivity.AuthorizationContract.View;
-import dmitroserdun.com.ua.hubviewer.view.screen.navigationActivity.NavigationActivity;
+import dmitroserdun.com.ua.hubviewer.view.screen.containers.NavigationActivity;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.utils.OauthUtils;
 import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
