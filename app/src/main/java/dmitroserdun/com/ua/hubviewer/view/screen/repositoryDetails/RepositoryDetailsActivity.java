@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
+import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
+import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 import dmitroserdun.com.ua.hubviewer.view.screen.containers.OtherUserDetailsActivity;
 import dmitroserdun.com.ua.hubviewer.view.screen.contentRepository.ContentRepositoryFragment;
 
@@ -29,7 +33,7 @@ import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 public class RepositoryDetailsActivity extends AppCompatActivity implements RepositoryDetailsContract.View,
         ContentRepositoryFragment.CallbackOpenDir {
 
-    public final String CONTENT_BACK_STACK_KEY="fragment_back_content_key";
+    public final String CONTENT_BACK_STACK_KEY = "fragment_back_content_key";
 
     private ImageView ivMinAva;
     private ImageView ivContentBack;
@@ -46,6 +50,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
     private TextView tvDescription;
 
     private View cvRepoDetailUser;
+    private LoadingView loadingView;
 
 
     private RepositoryDetailsContract.Presenter presenter;
@@ -55,6 +60,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
         initView();
+        loadingView.showLoadingView("loading repo");
         initBackStack();
         Gson gson = new GsonBuilder().create();
         Repository repository = gson.fromJson(getIntent().getStringExtra(Constance.REPOSITORY_DETAILS), Repository.class);
@@ -65,6 +71,13 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
     }
 
     private void initView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_repo_detail);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        loadingView = LoadingDialog.view(getSupportFragmentManager());
+
         ivMinAva = (ImageView) findViewById(R.id.iv_user_in_repo);
         ivContentBack = (ImageView) findViewById(R.id.iv_content_back);
         tvLogin = (TextView) findViewById(R.id.tv_repo_details_login);
@@ -86,13 +99,18 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
             startActivity(intent);
         });
         ivContentBack.setOnClickListener(v -> {
-
-            int count = getSupportFragmentManager().getBackStackEntryCount();
-            while(count > 1){
-                getSupportFragmentManager().popBackStack();
-            }
+             getSupportFragmentManager().popBackStack();
 
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 
     private void initBackStack() {
@@ -107,7 +125,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
                         getSupportFragmentManager().beginTransaction()
                                 .show(fragment)
                                 .commit();
-                    }
+                  }
 
                 }
         );
@@ -115,12 +133,12 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
 
     @Override
     public void showLoadingView(String msg) {
-
+        loadingView.showLoadingView(msg);
     }
 
     @Override
     public void hideLoadingView() {
-
+        loadingView.hideLoadingView();
     }
 
     @Override

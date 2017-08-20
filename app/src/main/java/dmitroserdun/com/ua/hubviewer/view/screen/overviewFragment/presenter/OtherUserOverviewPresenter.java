@@ -23,9 +23,15 @@ public class OtherUserOverviewPresenter implements OverviewContract.Presenter {
 
     @Override
     public void loadData() {
+        view.showLoadingView("");
         managerGitHubDataSource.getUser(username, user-> {
                 view.showOverviewData(user);
+            view.hideLoadingView();
             });
+
+        managerGitHubDataSource.getUserEvents(username, events -> {
+            view.showUserEvents(events);
+        });
 
     }
 

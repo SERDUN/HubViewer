@@ -16,8 +16,8 @@ import dmitroserdun.com.ua.hubviewer.view.adapter.ViewPageAdapter;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewFragment;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter.CurrentUserOverviewPresenter;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter.OtherUserOverviewPresenter;
-import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListFragment;
-import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter.UserRepositoryListPresenter;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.RepositoryListFragment;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.presenter.UserRepositoryListPresenter;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 

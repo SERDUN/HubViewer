@@ -15,10 +15,12 @@
     <string name="overview">Overview</string>
     <string name="repository">Repository</string>
     <string name="stars">Stars</string>
-    <string name="Followers">Overview</string>
-    <string name="Following">Overview</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
     <string name="list_empty">The list is empty</string>
     <string name="search_git_hub">Search GitHub</string>
+    <string name="events">Events</string>
+    <string name="loading">loading...</string>
 
     <string name="language">Language</string>
     <string name="open_issues">Open issues</string>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
@@ -82,6 +83,11 @@ remoteRepository.getCurrentUserRepositories(token,callback);
     @Override
     public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call) {
         remoteRepository.getContentForDirectory(name,reponame,path,call);
+    }
+
+    @Override
+    public void getUserEvents(String username, @NonNull Callback<List<Event>> callback) {
+        remoteRepository.getUserEvents(username,callback);
     }
 
     @Override

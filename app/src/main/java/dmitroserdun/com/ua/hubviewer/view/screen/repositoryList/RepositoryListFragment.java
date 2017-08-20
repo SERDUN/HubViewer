@@ -1,4 +1,4 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy;
+package dmitroserdun.com.ua.hubviewer.view.screen.repositoryList;
 
 import android.app.SearchManager;
 import android.content.Context;

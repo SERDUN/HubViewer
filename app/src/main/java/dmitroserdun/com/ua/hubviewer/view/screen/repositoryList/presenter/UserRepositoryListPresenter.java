@@ -1,10 +1,10 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter;
+package dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.presenter;
 
 import android.content.SharedPreferences;
 
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
-import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListContract;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.RepositoryListContract;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_TOKEN_KEY;
 

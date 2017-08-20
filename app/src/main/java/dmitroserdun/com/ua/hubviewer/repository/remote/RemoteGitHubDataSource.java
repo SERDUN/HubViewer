@@ -7,6 +7,7 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
@@ -34,11 +35,9 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
     @Override
     public void authentication(String login, String password, @NonNull Callback<Authorization> callback) {
 
-        Call<Authorization> auth = GitGubNetworkFactory.getService()
+        GitGubNetworkFactory.getService()
                 .authorize(BasicAuthUtils.generateAuthorizationString(login, password),
-                        BasicAuthUtils.createAuthorizationParam());
-
-        auth.enqueue(new retrofit2.Callback<Authorization>() {
+                        BasicAuthUtils.createAuthorizationParam()).enqueue(new retrofit2.Callback<Authorization>() {
             @Override
             public void onResponse(Call<Authorization> call, Response<Authorization> response) {
                 callback.onLoaded(response.body());
@@ -53,8 +52,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getCurrentUser(String token, @NonNull Callback<User> callback) {
-        Call<User> user = GitGubNetworkFactory.getService().getCurrentUser(token);
-        user.enqueue(new retrofit2.Callback<User>() {
+        GitGubNetworkFactory.getService().getCurrentUser(token).enqueue(new retrofit2.Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 callback.onLoaded(response.body());
@@ -71,8 +69,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getUser(String username, @NonNull Callback callback) {
-        Call<User> user = GitGubNetworkFactory.getService().getUser(username);
-        user.enqueue(new retrofit2.Callback<User>() {
+        GitGubNetworkFactory.getService().getUser(username).enqueue(new retrofit2.Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 callback.onLoaded(response.body());
@@ -88,9 +85,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback) {
-
-        Call<List<Repository>> repos = GitGubNetworkFactory.getService().getCurrentRepos(token);
-        repos.enqueue(new retrofit2.Callback<List<Repository>>() {
+        GitGubNetworkFactory.getService().getCurrentRepos(token).enqueue(new retrofit2.Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 callback.onLoaded(response.body());
@@ -106,8 +101,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getRepositories(String username, @NonNull Callback<List<Repository>> callback) {
-        Call<List<Repository>> repository = GitGubNetworkFactory.getService().getUserRepository(username);
-        repository.enqueue(new retrofit2.Callback<List<Repository>>() {
+        GitGubNetworkFactory.getService().getUserRepository(username).enqueue(new retrofit2.Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
                 callback.onLoaded(response.body());
@@ -123,8 +117,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback) {
-        Call<RepositoryDetails> repositoryDetailsCall = GitGubNetworkFactory.getService().getDetailsRepository(username, reponame);
-        repositoryDetailsCall.enqueue(new retrofit2.Callback<RepositoryDetails>() {
+        GitGubNetworkFactory.getService().getDetailsRepository(username, reponame).enqueue(new retrofit2.Callback<RepositoryDetails>() {
             @Override
             public void onResponse(Call<RepositoryDetails> call, Response<RepositoryDetails> response) {
                 callback.onLoaded(response.body());
@@ -139,8 +132,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> callback) {
-        Call<List<Directory>> repositoryDetailsCall = GitGubNetworkFactory.getService().getDirectory(name, reponame,path);
-       repositoryDetailsCall.enqueue(new retrofit2.Callback<List<Directory>>() {
+      GitGubNetworkFactory.getService().getDirectory(name, reponame,path).enqueue(new retrofit2.Callback<List<Directory>>() {
            @Override
            public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
                callback.onLoaded(response.body());
@@ -154,12 +146,27 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
        });
     }
 
+    @Override
+    public void getUserEvents(String username, Callback<List<Event>> callback) {
+       GitGubNetworkFactory.getService().getUserEvent(username).enqueue(new retrofit2.Callback<List<Event>>() {
+           @Override
+           public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+               callback.onLoaded(response.body());
+
+           }
+
+           @Override
+           public void onFailure(Call<List<Event>> call, Throwable t) {
+
+           }
+       });
+
+    }
+
 
     @Override
     public void searchRepository(String q, @NonNull Callback callback) {
-
-        Call<Page> pageCall = GitGubNetworkFactory.getService().getSearchRepository(q);
-        pageCall.enqueue(new retrofit2.Callback<Page>() {
+        GitGubNetworkFactory.getService().getSearchRepository(q).enqueue(new retrofit2.Callback<Page>() {
             @Override
             public void onResponse(Call<Page> call, Response<Page> response) {
                 callback.onLoaded(response.body());

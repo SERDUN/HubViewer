@@ -30,10 +30,15 @@ public class CurrentUserOverviewPresenter implements OverviewContract.Presenter 
 
     @Override
     public void loadData() {
+        view.showLoadingView("");
         managerGitHubDataSource.refreshLocalData();
-        managerGitHubDataSource.getCurrentUser(getToken(), user-> {
+        managerGitHubDataSource.getCurrentUser(getToken(), user -> {
             view.showOverviewData(user);
             saveLoginUserForRequest(user);
+            managerGitHubDataSource.getUserEvents(user.getLogin(), events -> {
+                view.showUserEvents(events);
+                view.hideLoadingView();
+            });
         });
 
     }

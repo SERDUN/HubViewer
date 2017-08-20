@@ -1,5 +1,8 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.view.screen.BaseView;
 
@@ -16,6 +19,8 @@ public class OverviewContract {
         void showPasswordError();
 
         void showOverviewData(User user);
+
+        void showUserEvents(List<Event> events);
 
 
     }

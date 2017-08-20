@@ -6,6 +6,7 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
@@ -38,6 +39,8 @@ public interface GitHubDataSource {
     void searchRepository(String name, @NonNull Callback<Page> callback);
 
     void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call);
+
+    void getUserEvents(String username, @NonNull Callback<List<Event>> callback);
 
     void refreshLocalData();
 }

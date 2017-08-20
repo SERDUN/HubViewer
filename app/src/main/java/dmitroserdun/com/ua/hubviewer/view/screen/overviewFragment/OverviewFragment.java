@@ -3,6 +3,10 @@ package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dmitroserdun.com.ua.hubviewer.R;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
+import dmitroserdun.com.ua.hubviewer.view.adapter.EventsListAdapter;
+import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
+import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 
 
 public class OverviewFragment extends Fragment implements OverviewContract.View {
@@ -41,6 +52,10 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
 
     private OnFragmentInteractionListener mListener;
     private OverviewContract.Presenter presenter;
+    private RecyclerView recyclerView;
+    private LoadingView loadingView;
+
+    private  ActionBar toolbar;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -75,6 +90,9 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     }
 
     private void initView(View view) {
+        toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
+        loadingView = LoadingDialog.view(getChildFragmentManager());
         ivAvatar = (ImageView) view.findViewById(R.id.iv_avatar);
         tvFullName = (TextView) view.findViewById(R.id.tv_full_name);
         tvLogin = (TextView) view.findViewById(R.id.tv_login);
@@ -86,18 +104,24 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
         tvCountRepository = (TextView) view.findViewById(R.id.tv_count_repository);
         tvCountFollowers = (TextView) view.findViewById(R.id.tv_count_followers);
         tvCountFollowing = (TextView) view.findViewById(R.id.tv_count_following);
-    }
 
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv_events);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        EventsListAdapter adapter = new EventsListAdapter(v -> {
+        }, new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+    }
 
 
     @Override
     public void showLoadingView(String msg) {
-
+        loadingView.showLoadingView("Loading Overview");
     }
 
     @Override
     public void hideLoadingView() {
-
+        loadingView.hideLoadingView();
     }
 
     @Override
@@ -123,6 +147,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
 
     @Override
     public void showOverviewData(User user) {
+        if(toolbar!=null)toolbar.setTitle(user.getName());
         tvWork.setText(user.getCompany());
         tvEmail.setText(user.getEmail());
         tvLocation.setText(user.getLocation());
@@ -137,6 +162,11 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
         Picasso.with(getContext()).load(user.getAvatarUrl()).into(ivAvatar);
 
 
+    }
+
+    @Override
+    public void showUserEvents(List<Event> events) {
+        ((EventsListAdapter) recyclerView.getAdapter()).swapList((ArrayList<Event>) events);
     }
 
 

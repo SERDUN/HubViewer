@@ -6,6 +6,7 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
@@ -48,5 +49,9 @@ public interface GitHubApiService {
 
     @GET("/repos/{username}/{reponame}/contents/{dir}")
     public Call<List<Directory>> getDirectory(@Path("username") String username, @Path("reponame") String reponame,@Path("dir") String dir);
+
+
+    @GET("/users/{username}/events")
+    public Call<List<Event>> getUserEvent(@Path("username") String username);
 
 }

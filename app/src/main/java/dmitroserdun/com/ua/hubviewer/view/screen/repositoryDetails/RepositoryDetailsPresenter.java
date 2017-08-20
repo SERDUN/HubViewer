@@ -1,10 +1,9 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails;
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import dmitroserdun.com.ua.hubviewer.data.model.user.Owner;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.user.Owner;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 
 /**
@@ -36,7 +35,7 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
     public void loadRepositoryContent(String path) {
         managerGitHubDataSource.getContentForDirectory(repository.getOwner().getLogin(), repository.getName(), path, content -> {
             view.showContent(content);
-            Log.d("content", "loadRepositoryContent: "+content.toString());
+            view.hideLoadingView();
         });
     }
 
@@ -46,6 +45,7 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
                     view.showRepoDetails(repository);
                 }
         );
+
 
     }
 

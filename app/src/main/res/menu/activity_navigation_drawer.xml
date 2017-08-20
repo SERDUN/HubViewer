@@ -17,11 +17,11 @@
         <item
             android:id="@+id/nav_followers"
             android:icon="@drawable/icon_follower"
-            android:title="@string/Followers" />
+            android:title="@string/followers" />
         <item
             android:id="@+id/nav_following"
             android:icon="@drawable/icon_following"
-            android:title="@string/Following" />
+            android:title="@string/following" />
 
     </group>
 
