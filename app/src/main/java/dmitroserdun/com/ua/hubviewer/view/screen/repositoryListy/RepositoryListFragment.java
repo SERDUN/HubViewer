@@ -2,6 +2,7 @@ package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +14,18 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.view.adapter.RecyclerListAdapter;
 import dmitroserdun.com.ua.hubviewer.view.customView.RecyclerViewEmptySupport;
+import dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails.RepositoryDetailsActivity;
 
 
 public class RepositoryListFragment extends Fragment implements RepositoryListContract.View {
@@ -31,7 +37,6 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
 
     private String mParam1;
     private String mParam2;
-
 
 
     private RepositoryListContract.Presenter presenter;
@@ -77,8 +82,9 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
         emptyView = view.findViewById(R.id.tv_empty);
         recyclerView.setEmptyView(emptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new RecyclerListAdapter(v -> {
-        }, new ArrayList<Repository>()));
+        RecyclerListAdapter adapter= new RecyclerListAdapter(v -> {presenter.openRepositoryDetails(v);},
+                new ArrayList<>());
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -120,6 +126,14 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
     }
 
     @Override
+    public void openRepositoryDetails(Repository repository) {
+        Intent intent = new Intent(getContext(), RepositoryDetailsActivity.class);
+        Gson gson = new GsonBuilder().create();
+        intent.putExtra(Constance.REPOSITORY_DETAILS, gson.toJson(repository));
+        startActivity(intent);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.navigation, menu);
 
@@ -136,6 +150,7 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
                 return false;
             }
 
+            // TODO: 20.08.2017 FIX bag search
             @Override
             public boolean onQueryTextChange(String newText) {
                 presenter.search(newText);

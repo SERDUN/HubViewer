@@ -8,7 +8,7 @@ import dmitroserdun.com.ua.hubviewer.view.screen.BaseView;
  */
 
 public class OverviewContract {
-    interface View extends BaseView<OverviewContract.Presenter> {
+    public interface View extends BaseView<OverviewContract.Presenter> {
         void showLoginError();
 
         void showMessage(String s);
@@ -20,7 +20,7 @@ public class OverviewContract {
 
     }
 
-    interface Presenter {
+    public interface Presenter {
         public void loadData();
 
 

@@ -1,6 +1,7 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.usersDetailsTabFragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.view.adapter.ViewPageAdapter;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewFragment;
+import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter.CurrentUserOverviewPresenter;
+import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter.OtherUserOverviewPresenter;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListFragment;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter.UserRepositoryListPresenter;
 
@@ -26,26 +29,21 @@ public class UsersDetailsTabFragment extends Fragment {
     private ViewPager viewPager;
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM_USERNAME = "username_param";
 
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String username;
 
 
     public UsersDetailsTabFragment() {
         // Required empty public constructor
     }
 
-    //
-    // TODO: Rename and change types and number of parameters
-    public static UsersDetailsTabFragment newInstance(String param1, String param2) {
+    public static UsersDetailsTabFragment newInstance(String param_username) {
         UsersDetailsTabFragment fragment = new UsersDetailsTabFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM_USERNAME, param_username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,8 +52,7 @@ public class UsersDetailsTabFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString(ARG_PARAM_USERNAME);
         }
     }
 
@@ -79,19 +76,28 @@ public class UsersDetailsTabFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPageAdapter adapter = new ViewPageAdapter(getChildFragmentManager());
-        adapter.addFragment(new OverviewFragment(), getResources().getString(R.string.overview));
-
-        //Appoint an view presenter to work with user repository
+        OverviewFragment overviewFragment = OverviewFragment.newInstance("", "");
         RepositoryListFragment repositoryListFragment = RepositoryListFragment.newInstance("", "");
-        new UserRepositoryListPresenter(repositoryListFragment,
-                Injection.provideTasksRepository(getContext()), getContext().getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE));
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE);
 
+
+        if (username.isEmpty()) {
+            new CurrentUserOverviewPresenter(overviewFragment, Injection.provideTasksRepository(getContext()),
+                    sharedPreferences);
+
+        } else {
+            new OtherUserOverviewPresenter(overviewFragment, Injection.provideTasksRepository(getContext()),
+                    username);
+        }
+        //Appoint an view presenter to work with user repository
+        new UserRepositoryListPresenter(repositoryListFragment,
+                Injection.provideTasksRepository(getContext()), username, sharedPreferences);
+
+        adapter.addFragment(overviewFragment, getResources().getString(R.string.overview));
         adapter.addFragment(repositoryListFragment, getResources().getString(R.string.repository));
 
         viewPager.setAdapter(adapter);
     }
-
-
 
 
 }

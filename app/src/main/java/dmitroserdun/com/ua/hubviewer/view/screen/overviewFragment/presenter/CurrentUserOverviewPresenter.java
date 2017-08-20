@@ -1,10 +1,10 @@
-package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
+package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter;
 
 import android.content.SharedPreferences;
 
 import dmitroserdun.com.ua.hubviewer.data.model.User;
-import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
+import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewContract;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_FULL_NAME;
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_TOKEN_KEY;
@@ -14,14 +14,14 @@ import static dmitroserdun.com.ua.hubviewer.utils.Constance.CURRENT_USERNAME;
  * Created by User on 19.08.2017.
  */
 
-public class OverviewPresenter implements OverviewContract.Presenter {
+public class CurrentUserOverviewPresenter implements OverviewContract.Presenter {
     private OverviewContract.View view;
     private ManagerGitHubDataSource managerGitHubDataSource;
     private SharedPreferences pref;
 
-    public OverviewPresenter(OverviewContract.View view,
-                             ManagerGitHubDataSource managerGitHubDataSource,
-                             SharedPreferences pref) {
+    public CurrentUserOverviewPresenter(OverviewContract.View view,
+                                        ManagerGitHubDataSource managerGitHubDataSource,
+                                        SharedPreferences pref) {
         this.view = view;
         view.setPresenter(this);//register view
         this.managerGitHubDataSource = managerGitHubDataSource;
@@ -31,17 +31,9 @@ public class OverviewPresenter implements OverviewContract.Presenter {
     @Override
     public void loadData() {
         managerGitHubDataSource.refreshLocalData();
-        managerGitHubDataSource.getCurrentUser(getToken(), new GitHubDataSource.Callback<User>() {
-            @Override
-            public void onLoaded(User user) {
-                view.showOverviewData(user);
-                saveLoginUserForRequest(user);
-            }
-
-            @Override
-            public void onFailure(String e) {
-
-            }
+        managerGitHubDataSource.getCurrentUser(getToken(), user-> {
+            view.showOverviewData(user);
+            saveLoginUserForRequest(user);
         });
 
     }

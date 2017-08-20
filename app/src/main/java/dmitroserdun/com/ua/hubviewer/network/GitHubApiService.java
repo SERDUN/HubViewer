@@ -7,6 +7,7 @@ import java.util.List;
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,10 +30,19 @@ public interface GitHubApiService {
     @GET("/user")
     public Call<User> getCurrentUser(@Query("access_token") String token);
 
+    @GET("/user/repos")
+    public Call<List<Repository>> getCurrentRepos(@Query("access_token") String token);
+
+    @GET("/users/{username}")
+    public Call<User> getUser(@Path("username") String username);
+
     @GET("/users/{username}/repos")
     public Call<List<Repository>> getUserRepository(@Path("username") String username);
 
     @GET("/search/repositories")
     public Call<Page> getSearchRepository(@Query("q") String q);
+
+    @GET("/repos/{username}/{reponame}")
+    public Call<RepositoryDetails> getDetailsRepository(@Path("username") String username,@Path("reponame") String reponame);
 
 }

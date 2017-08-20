@@ -1,6 +1,5 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.User;
-import dmitroserdun.com.ua.hubviewer.utils.Injection;
-
-import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 
 
 public class OverviewFragment extends Fragment implements OverviewContract.View {
@@ -74,8 +70,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
         initView(view);
-        new OverviewPresenter(this, Injection.provideTasksRepository(getContext()),
-                getContext().getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE));
         presenter.loadData();
         return view;
     }
@@ -95,22 +89,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void showLoadingView(String msg) {

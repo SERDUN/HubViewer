@@ -20,6 +20,11 @@
     <string name="list_empty">The list is empty</string>
     <string name="search_git_hub">Search GitHub</string>
 
+    <string name="language">Language</string>
+    <string name="open_issues">Open issues</string>
+    <string name="default_branch">Default Branch</string>
+    <string name="stargazers_count">Stargazers Count</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
+import dmitroserdun.com.ua.hubviewer.data.model.User;
 import dmitroserdun.com.ua.hubviewer.repository.local.LocalGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.remote.RemoteGitHubDataSource;
 
@@ -43,7 +45,7 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getCurrentUser(String token, @NonNull Callback callback) {
+    public void getCurrentUser(String token, @NonNull Callback<User> callback) {
         if (useRemoteDataSource) {
             remoteRepository.getCurrentUser(token, callback);
             useRemoteDataSource = false;
@@ -52,13 +54,13 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
-    public void getUser(String username, @NonNull Callback callback) {
-
+    public void getUser(String username, @NonNull Callback<User> callback) {
+        remoteRepository.getUser(username, callback);
     }
 
     @Override
-    public void getCurrentUserRepositories(@NonNull Callback callback) {
-
+    public void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback) {
+remoteRepository.getCurrentUserRepositories(token,callback);
     }
 
     @Override
@@ -69,6 +71,11 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
         } else localRepository.getRepositories(username, callback);
 
 
+    }
+
+    @Override
+    public void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback) {
+        remoteRepository.getDetailsRepositories(username,reponame,callback);
     }
 
     @Override

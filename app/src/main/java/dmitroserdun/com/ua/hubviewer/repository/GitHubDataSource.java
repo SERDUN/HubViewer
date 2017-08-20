@@ -7,6 +7,7 @@ import java.util.List;
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.data.model.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
+import dmitroserdun.com.ua.hubviewer.data.model.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.User;
 
 /**
@@ -19,19 +20,19 @@ public interface GitHubDataSource {
 
         void onLoaded(T o);
 
-        void onFailure(String e);
     }
 
     void authentication(String login, String password, @NonNull Callback<Authorization> callback);
 
     void getCurrentUser(String token, @NonNull Callback<User> callback);
 
-    void getUser(String username, @NonNull Callback callback);
+    void getUser(String username, @NonNull Callback<User> callback);
 
-    // TODO: 19.08.2017 delete this method
-    void getCurrentUserRepositories(@NonNull Callback callback);
+    void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback);
 
     void getRepositories(String username, @NonNull Callback<List<Repository>> callback);
+
+    void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback);
 
     void searchRepository(String name, @NonNull Callback<Page> callback);
 

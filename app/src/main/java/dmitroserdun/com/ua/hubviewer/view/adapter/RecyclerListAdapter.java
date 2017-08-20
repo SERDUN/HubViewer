@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.Repository;
@@ -17,11 +18,11 @@ import dmitroserdun.com.ua.hubviewer.view.listener.RecyclerViewListener;
  */
 
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.PlaceHolder> {
-    private ArrayList<Repository> repository;
+    private List<Repository> repository;
     private RecyclerViewListener recyclerViewListener;
 
 
-    public RecyclerListAdapter(RecyclerViewListener recyclerViewListener, ArrayList<Repository> repository) {
+    public RecyclerListAdapter(RecyclerViewListener<Repository> recyclerViewListener, List<Repository> repository) {
         this.recyclerViewListener = recyclerViewListener;
         this.repository = repository;
     }
@@ -49,7 +50,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public int getItemCount() {
-        return repository.size();
+        return (repository == null) ? 0 : repository.size();
     }
 
     class PlaceHolder extends RecyclerView.ViewHolder {
@@ -62,6 +63,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             tvRepoName = (TextView) itemView.findViewById(R.id.tv_repo_name);
             tvRepoDescription = (TextView) itemView.findViewById(R.id.tv_repo_description);
             tvRepoLanguage = (TextView) itemView.findViewById(R.id.tv_repo_language);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerViewListener.onClick(repository.get(getAdapterPosition()));
+                }
+            });
 //
 //            itemView.setOnClickListener(v -> {
 //                lastCheckedPosition = getAdapterPosition();

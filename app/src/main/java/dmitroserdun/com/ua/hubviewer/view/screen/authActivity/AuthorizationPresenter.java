@@ -4,9 +4,7 @@ import android.content.SharedPreferences;
 
 import java.io.IOException;
 
-import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
 import dmitroserdun.com.ua.hubviewer.network.TokenConnector;
-import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import okhttp3.Call;
@@ -47,21 +45,15 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
             view.showPasswordError();
         } else {
             view.showLoadingView("Authentification");
-            managerGitHubDataSource.authentication(login, password, new GitHubDataSource.Callback<Authorization>() {
-                @Override
-                public void onLoaded(Authorization o) {
-                    if (o != null) {
-                        pref.edit().putString(CURRENT_TOKEN_KEY, o.getToken()).apply();
-                        view.hideLoadingView();
-                        view.openOverview();
-                    } else {
-                        notifyUser("Incorrect identification data");
-                    }
-                }
+            managerGitHubDataSource.authentication(login, password, auth -> {
+                if (auth != null) {
+                    pref.edit().putString(CURRENT_TOKEN_KEY, auth.getToken()).apply();
+                    view.hideLoadingView();
+                    view.openOverview();
+                } else {
+                    notifyUser("Incorrect identification data");
 
-                @Override
-                public void onFailure(String e) {
-                    notifyUser("Network error");
+
                 }
             });
         }
@@ -97,10 +89,9 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
 
     @Override
     public void checkAuthorization() {
-        if (pref.getString(Constance.CURRENT_TOKEN_KEY, "").isEmpty())
-        {
+        if (pref.getString(Constance.CURRENT_TOKEN_KEY, "").isEmpty()) {
             logIn();
-        }else {
+        } else {
             view.openOverview();
         }
 

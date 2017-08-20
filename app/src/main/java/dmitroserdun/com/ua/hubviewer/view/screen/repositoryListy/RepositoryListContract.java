@@ -19,6 +19,9 @@ public interface RepositoryListContract {
 
         void showRepository(List<Repository> repositories);
 
+        public void openRepositoryDetails(Repository repository);
+
+
 
 
 
@@ -27,6 +30,7 @@ public interface RepositoryListContract {
     interface Presenter {
         public void loadRepository();
         public void search(String q);
+        public void openRepositoryDetails(Repository repository);
 
     }
 }

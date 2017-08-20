@@ -3,6 +3,7 @@ package dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.presenter;
 import android.content.SharedPreferences;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Page;
+import dmitroserdun.com.ua.hubviewer.data.model.Repository;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryListy.RepositoryListContract;
@@ -15,6 +16,7 @@ public class GitGubSearchPresenter implements RepositoryListContract.Presenter {
     private RepositoryListContract.View view;
     private ManagerGitHubDataSource managerGitHubDataSource;
     private SharedPreferences pref;
+
 
     public GitGubSearchPresenter(RepositoryListContract.View view,
                                  ManagerGitHubDataSource managerGitHubDataSource,
@@ -53,11 +55,13 @@ public class GitGubSearchPresenter implements RepositoryListContract.Presenter {
                     view.hideLoadingView();
                 }
 
-                @Override
-                public void onFailure(String e) {
-                    view.hideLoadingView();
-                }
+
             });
 
+    }
+
+    @Override
+    public void openRepositoryDetails(Repository repository) {
+        view.openRepositoryDetails(repository);
     }
 }
