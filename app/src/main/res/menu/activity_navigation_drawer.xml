@@ -9,19 +9,19 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/overview" />
 
-        <item
-            android:id="@+id/nav_stars"
-            android:icon="@drawable/star_icon"
-            android:title="@string/stars" />
+        <!--<item-->
+            <!--android:id="@+id/nav_stars"-->
+            <!--android:icon="@drawable/star_icon"-->
+            <!--android:title="@string/stars" />-->
 
-        <item
-            android:id="@+id/nav_followers"
-            android:icon="@drawable/icon_follower"
-            android:title="@string/followers" />
-        <item
-            android:id="@+id/nav_following"
-            android:icon="@drawable/icon_following"
-            android:title="@string/following" />
+        <!--<item-->
+            <!--android:id="@+id/nav_followers"-->
+            <!--android:icon="@drawable/icon_follower"-->
+            <!--android:title="@string/followers" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_following"-->
+            <!--android:icon="@drawable/icon_following"-->
+            <!--android:title="@string/following" />-->
 
     </group>
 

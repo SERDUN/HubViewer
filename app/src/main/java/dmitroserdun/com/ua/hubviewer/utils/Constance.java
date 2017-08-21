@@ -11,4 +11,5 @@ public class Constance {
     public static final String CURRENT_FULL_NAME = "current_full_name";
     public static final String REPOSITORY_DETAILS = "url_repository_details";
     public static final String OTHER_USER_DETAILS = "other_user_details";
+    public static final String BROADCAST_ACTION = "dmitroserdun.com.ua.hubviewer_broadcast";
 }

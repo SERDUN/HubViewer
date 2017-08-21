@@ -99,11 +99,12 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
             startActivity(intent);
         });
         ivContentBack.setOnClickListener(v -> {
-             getSupportFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
 
         });
-    }
 
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -125,7 +126,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
                         getSupportFragmentManager().beginTransaction()
                                 .show(fragment)
                                 .commit();
-                  }
+                    }
 
                 }
         );

@@ -3,6 +3,7 @@
     package="dmitroserdun.com.ua.hubviewer">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +26,14 @@
         </activity>
         <activity android:name=".view.screen.repositoryDetails.RepositoryDetailsActivity" />
         <activity android:name=".view.screen.containers.OtherUserDetailsActivity"></activity>
+
+        <provider
+            android:name=".data.provider.HubProvider"
+            android:authorities="dmitroserdun.com.ua.hubviewer.data.provider.ContractClass"
+            android:exported="false" />
     </application>
+
+
+
 
 </manifest>

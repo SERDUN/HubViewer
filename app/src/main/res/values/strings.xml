@@ -21,6 +21,7 @@
     <string name="search_git_hub">Search GitHub</string>
     <string name="events">Events</string>
     <string name="loading">loading...</string>
+    <string name="no_connection">no connection</string>
 
     <string name="language">Language</string>
     <string name="open_issues">Open issues</string>

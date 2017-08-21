@@ -43,6 +43,8 @@ public class CurrentUserOverviewPresenter implements OverviewContract.Presenter 
 
     }
 
+
+
     private String getToken() {
         return pref.getString(CURRENT_TOKEN_KEY, "");
 

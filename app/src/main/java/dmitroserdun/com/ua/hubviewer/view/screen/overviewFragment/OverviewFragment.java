@@ -55,7 +55,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     private RecyclerView recyclerView;
     private LoadingView loadingView;
 
-    private  ActionBar toolbar;
+    private ActionBar toolbar;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -147,7 +147,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
 
     @Override
     public void showOverviewData(User user) {
-        if(toolbar!=null)toolbar.setTitle(user.getName());
+        if (toolbar != null) toolbar.setTitle(user.getName());
         tvWork.setText(user.getCompany());
         tvEmail.setText(user.getEmail());
         tvLocation.setText(user.getLocation());
