@@ -22,6 +22,7 @@
     <string name="events">Events</string>
     <string name="loading">loading...</string>
     <string name="no_connection">no connection</string>
+    <string name="unknown_host">Unable to connect to server</string>
 
     <string name="language">Language</string>
     <string name="open_issues">Open issues</string>

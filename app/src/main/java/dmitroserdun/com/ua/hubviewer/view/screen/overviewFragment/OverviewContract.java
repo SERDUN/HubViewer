@@ -14,7 +14,7 @@ public class OverviewContract {
     public interface View extends BaseView<OverviewContract.Presenter> {
         void showLoginError();
 
-        void showMessage(String s);
+        void showMessage(int msg);
 
         void showPasswordError();
 

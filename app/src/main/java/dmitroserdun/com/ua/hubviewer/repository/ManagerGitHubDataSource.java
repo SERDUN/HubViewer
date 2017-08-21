@@ -42,6 +42,11 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
+    public void onFailureDetect(CallbackError callbackError) {
+        remoteRepository.onFailureDetect(callbackError);
+    }
+
+    @Override
     public void authentication(String login, String password, @NonNull Callback<Authorization> callback) {
         remoteRepository.authentication(login, password, callback);
     }
@@ -62,7 +67,7 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback) {
-remoteRepository.getCurrentUserRepositories(token,callback);
+        remoteRepository.getCurrentUserRepositories(token, callback);
     }
 
     @Override
@@ -77,17 +82,17 @@ remoteRepository.getCurrentUserRepositories(token,callback);
 
     @Override
     public void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback) {
-        remoteRepository.getDetailsRepositories(username,reponame,callback);
+        remoteRepository.getDetailsRepositories(username, reponame, callback);
     }
 
     @Override
     public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call) {
-        remoteRepository.getContentForDirectory(name,reponame,path,call);
+        remoteRepository.getContentForDirectory(name, reponame, path, call);
     }
 
     @Override
     public void getUserEvents(String username, @NonNull Callback<List<Event>> callback) {
-        remoteRepository.getUserEvents(username,callback);
+        remoteRepository.getUserEvents(username, callback);
     }
 
     @Override

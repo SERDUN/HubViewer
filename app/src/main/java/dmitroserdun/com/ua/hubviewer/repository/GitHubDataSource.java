@@ -24,6 +24,12 @@ public interface GitHubDataSource {
 
     }
 
+    interface CallbackError {
+        void onFailure(String failure);
+    }
+
+    void onFailureDetect(CallbackError callbackError);
+
     void authentication(String login, String password, @NonNull Callback<Authorization> callback);
 
     void getCurrentUser(String token, @NonNull Callback<User> callback);

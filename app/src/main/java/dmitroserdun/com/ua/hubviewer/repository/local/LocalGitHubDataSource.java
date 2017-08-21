@@ -43,6 +43,11 @@ public class LocalGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
+    public void onFailureDetect(CallbackError callbackError) {
+
+    }
+
+    @Override
     public void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback) {
 
     }

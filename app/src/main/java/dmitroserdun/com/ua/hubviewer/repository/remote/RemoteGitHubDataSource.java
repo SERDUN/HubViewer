@@ -24,12 +24,18 @@ import retrofit2.Response;
 
 public class RemoteGitHubDataSource implements GitHubDataSource {
     private static RemoteGitHubDataSource INSTANCE = null;
+    private CallbackError callbackError;
 
     public static RemoteGitHubDataSource getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new RemoteGitHubDataSource();
         }
         return INSTANCE;
+    }
+
+    @Override
+    public void onFailureDetect(CallbackError callbackError) {
+        this.callbackError = callbackError;
     }
 
     @Override
@@ -45,6 +51,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<Authorization> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
             }
         });
 
@@ -61,6 +68,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });
@@ -78,6 +86,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });
@@ -94,6 +103,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });
@@ -110,6 +120,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });
@@ -125,6 +136,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<RepositoryDetails> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });
@@ -132,34 +144,36 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> callback) {
-      GitGubNetworkFactory.getService().getDirectory(name, reponame,path).enqueue(new retrofit2.Callback<List<Directory>>() {
-           @Override
-           public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
-               callback.onLoaded(response.body());
+        GitGubNetworkFactory.getService().getDirectory(name, reponame, path).enqueue(new retrofit2.Callback<List<Directory>>() {
+            @Override
+            public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
+                callback.onLoaded(response.body());
 
-           }
+            }
 
-           @Override
-           public void onFailure(Call<List<Directory>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<List<Directory>> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
-           }
-       });
+            }
+        });
     }
 
     @Override
     public void getUserEvents(String username, Callback<List<Event>> callback) {
-       GitGubNetworkFactory.getService().getUserEvent(username).enqueue(new retrofit2.Callback<List<Event>>() {
-           @Override
-           public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-               callback.onLoaded(response.body());
+        GitGubNetworkFactory.getService().getUserEvent(username).enqueue(new retrofit2.Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                callback.onLoaded(response.body());
 
-           }
+            }
 
-           @Override
-           public void onFailure(Call<List<Event>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
-           }
-       });
+            }
+        });
 
     }
 
@@ -179,6 +193,7 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
 
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
+                callbackError.onFailure(t.getMessage());
 
             }
         });

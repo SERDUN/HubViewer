@@ -2,6 +2,7 @@ package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter;
 
 import android.content.SharedPreferences;
 
+import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewContract;
@@ -31,6 +32,10 @@ public class CurrentUserOverviewPresenter implements OverviewContract.Presenter 
     @Override
     public void loadData() {
         view.showLoadingView("");
+        managerGitHubDataSource.onFailureDetect(v -> {
+            view.showMessage(R.string.unknown_host);
+            view.hideLoadingView();
+        });
         managerGitHubDataSource.refreshLocalData();
         managerGitHubDataSource.getCurrentUser(getToken(), user -> {
             view.showOverviewData(user);
@@ -44,7 +49,6 @@ public class CurrentUserOverviewPresenter implements OverviewContract.Presenter 
     }
 
 
-
     private String getToken() {
         return pref.getString(CURRENT_TOKEN_KEY, "");
 
@@ -54,4 +58,6 @@ public class CurrentUserOverviewPresenter implements OverviewContract.Presenter 
         pref.edit().putString(CURRENT_USERNAME, user.getLogin()).apply();
         pref.edit().putString(CURRENT_FULL_NAME, user.getName()).apply();
     }
+
+
 }
