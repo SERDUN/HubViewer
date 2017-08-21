@@ -45,16 +45,18 @@ public class AuthorizationPresenter implements AuthorizationContract.Presenter {
             view.showPasswordError();
         } else {
             view.showLoadingView("Authentification");
+
+
             managerGitHubDataSource.authentication(login, password, auth -> {
                 if (auth != null) {
                     pref.edit().putString(CURRENT_TOKEN_KEY, auth.getToken()).apply();
-                    view.hideLoadingView();
                     view.openOverview();
-                } else {
-                    notifyUser("Incorrect identification data");
-
-
                 }
+            }, t -> {
+                notifyUser("Incorrect identification data");
+
+            }, () -> {
+                view.hideLoadingView();
             });
         }
 

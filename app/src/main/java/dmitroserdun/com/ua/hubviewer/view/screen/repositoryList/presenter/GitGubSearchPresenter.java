@@ -2,9 +2,7 @@ package dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.presenter;
 
 import android.content.SharedPreferences;
 
-import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
-import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryList.RepositoryListContract;
 
@@ -29,35 +27,22 @@ public class GitGubSearchPresenter implements RepositoryListContract.Presenter {
 
     @Override
     public void loadRepository() {
-//        managerGitHubDataSource.searchRepository("google", new GitHubDataSource.Callback<Page>() {
-//            @Override
-//            public void onLoaded(Page o) {
-//                view.showRepository(o.getItems());
-//            }
-//
-//            @Override
-//            public void onFailure(String e) {
-//                int r=3;
-//            }
-//        });
-
     }
 
     @Override
     public void search(String q) {
         view.showLoadingView("");
-        if (!q.isEmpty())
-            managerGitHubDataSource.searchRepository(q, new GitHubDataSource.Callback<Page>() {
-                @Override
-                public void onLoaded(Page o) {
-                    if (o != null)
-                        view.showRepository(o.getItems());
-                    view.hideLoadingView();
-                }
+        if (!q.isEmpty()) {
+            managerGitHubDataSource.searchRepository(q, repo -> {
+                if (repo != null)
+                    view.showRepository(repo.getItems());
+            }, t -> {
 
+            }, () -> {
+                view.hideLoadingView();
 
             });
-
+        }
     }
 
     @Override

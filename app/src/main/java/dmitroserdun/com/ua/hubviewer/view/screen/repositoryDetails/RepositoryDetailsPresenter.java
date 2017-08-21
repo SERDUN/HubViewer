@@ -35,14 +35,20 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
     public void loadRepositoryContent(String path) {
         managerGitHubDataSource.getContentForDirectory(repository.getOwner().getLogin(), repository.getName(), path, content -> {
             view.showContent(content);
+        }, t -> {
+        }, () -> {
             view.hideLoadingView();
+
         });
+
     }
 
     @Override
     public void loadDetails() {
-        managerGitHubDataSource.getDetailsRepositories(repository.getOwner().getLogin(), repository.getName(), repository -> {
-                    view.showRepoDetails(repository);
+        managerGitHubDataSource.getDetailsRepositories(repository.getOwner().getLogin(), repository.getName(), repoDetails -> {
+                    view.showRepoDetails(repoDetails);
+                }, t -> {
+                }, () -> {
                 }
         );
 

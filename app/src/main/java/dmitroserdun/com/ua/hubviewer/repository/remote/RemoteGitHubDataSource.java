@@ -1,8 +1,5 @@
 package dmitroserdun.com.ua.hubviewer.repository.remote;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
@@ -14,6 +11,8 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.network.GitGubNetworkFactory;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
+import dmitroserdun.com.ua.hubviewer.repository.callback.Action0;
+import dmitroserdun.com.ua.hubviewer.repository.callback.Action1;
 import dmitroserdun.com.ua.hubviewer.utils.BasicAuthUtils;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -24,7 +23,6 @@ import retrofit2.Response;
 
 public class RemoteGitHubDataSource implements GitHubDataSource {
     private static RemoteGitHubDataSource INSTANCE = null;
-    private CallbackError callbackError;
 
     public static RemoteGitHubDataSource getInstance() {
         if (INSTANCE == null) {
@@ -33,170 +31,173 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
         return INSTANCE;
     }
 
-    @Override
-    public void onFailureDetect(CallbackError callbackError) {
-        this.callbackError = callbackError;
-    }
 
     @Override
-    public void authentication(String login, String password, @NonNull Callback<Authorization> callback) {
-
+    public void authentication(String login, String password, Action1<Authorization> onSuccess, Action1 onFailure, Action0 onComplete) {
         GitGubNetworkFactory.getService()
                 .authorize(BasicAuthUtils.generateAuthorizationString(login, password),
                         BasicAuthUtils.createAuthorizationParam()).enqueue(new retrofit2.Callback<Authorization>() {
             @Override
             public void onResponse(Call<Authorization> call, Response<Authorization> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
             }
 
             @Override
             public void onFailure(Call<Authorization> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
+                onFailure.call(t);
+                onComplete.call();
+
             }
         });
-
     }
 
+
     @Override
-    public void getCurrentUser(String token, @NonNull Callback<User> callback) {
+    public void getCurrentUser(String token, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete) {
         GitGubNetworkFactory.getService().getCurrentUser(token).enqueue(new retrofit2.Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
 
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
+                onFailure.call(t);
+                onComplete.call();
             }
         });
-
     }
 
     @Override
-    public void getUser(String username, @NonNull Callback callback) {
+    public void getUser(String username, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete) {
         GitGubNetworkFactory.getService().getUser(username).enqueue(new retrofit2.Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
 
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
+                onFailure.call(t);
+                onComplete.call();
 
             }
         });
     }
 
     @Override
-    public void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback) {
+    public void getCurrentUserRepositories(String token, Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete) {
         GitGubNetworkFactory.getService().getCurrentRepos(token).enqueue(new retrofit2.Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
 
             }
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
+                onFailure.call(t);
+                onComplete.call();
             }
         });
     }
 
     @Override
-    public void getRepositories(String username, @NonNull Callback<List<Repository>> callback) {
+    public void getRepositories(String username, Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete) {
+
         GitGubNetworkFactory.getService().getUserRepository(username).enqueue(new retrofit2.Callback<List<Repository>>() {
             @Override
             public void onResponse(Call<List<Repository>> call, Response<List<Repository>> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
 
             }
 
             @Override
             public void onFailure(Call<List<Repository>> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
+                onFailure.call(t);
+                onComplete.call();
             }
         });
     }
 
     @Override
-    public void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback) {
+    public void getDetailsRepositories(String username, String reponame, Action1<RepositoryDetails> onSuccess, Action1 onFailure, Action0 onComplete) {
         GitGubNetworkFactory.getService().getDetailsRepository(username, reponame).enqueue(new retrofit2.Callback<RepositoryDetails>() {
             @Override
             public void onResponse(Call<RepositoryDetails> call, Response<RepositoryDetails> response) {
-                callback.onLoaded(response.body());
+                onSuccess.call(response.body());
+                onComplete.call();
             }
 
             @Override
             public void onFailure(Call<RepositoryDetails> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
+                onFailure.call(t);
+                onComplete.call();
             }
         });
     }
 
     @Override
-    public void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> callback) {
-        GitGubNetworkFactory.getService().getDirectory(name, reponame, path).enqueue(new retrofit2.Callback<List<Directory>>() {
-            @Override
-            public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
-                callback.onLoaded(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Directory>> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
-            }
-        });
-    }
-
-    @Override
-    public void getUserEvents(String username, Callback<List<Event>> callback) {
-        GitGubNetworkFactory.getService().getUserEvent(username).enqueue(new retrofit2.Callback<List<Event>>() {
-            @Override
-            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                callback.onLoaded(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Event>> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
-
-            }
-        });
-
-    }
-
-
-    @Override
-    public void searchRepository(String q, @NonNull Callback callback) {
-        GitGubNetworkFactory.getService().getSearchRepository(q).enqueue(new retrofit2.Callback<Page>() {
+    public void searchRepository(String name, Action1<Page> onSuccess, Action1 onFailure, Action0 onComplete) {
+        GitGubNetworkFactory.getService().getSearchRepository(name).enqueue(new retrofit2.Callback<Page>() {
             @Override
             public void onResponse(Call<Page> call, Response<Page> response) {
-                callback.onLoaded(response.body());
-
-                if (response.body() == null) {
-                    Log.d("text_dd", "onResponse: " + response.message());
-                }
+                onSuccess.call(response.body());
+                onComplete.call();
 
             }
 
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
-                callbackError.onFailure(t.getMessage());
+                onFailure.call(t);
+                onComplete.call();
+            }
+        });
+    }
+
+    @Override
+    public void getContentForDirectory(String name, String reponame, String path, Action1<List<Directory>> onSuccess, Action1 onFailure, Action0 onComplete) {
+        GitGubNetworkFactory.getService().getDirectory(name, reponame, path).enqueue(new retrofit2.Callback<List<Directory>>() {
+            @Override
+            public void onResponse(Call<List<Directory>> call, Response<List<Directory>> response) {
+                onSuccess.call(response.body());
+                onComplete.call();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Directory>> call, Throwable t) {
+                onFailure.call(t);
+                onComplete.call();
+            }
+        });
+    }
+
+    @Override
+    public void getUserEvents(String username, Action1<List<Event>> onSuccess, Action1 onFailure, Action0 onComplete) {
+        GitGubNetworkFactory.getService().getUserEvent(username).enqueue(new retrofit2.Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                onSuccess.call(response.body());
+                onComplete.call();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                onFailure.call(t);
+                onComplete.call();
 
             }
         });
+
     }
 
     @Override

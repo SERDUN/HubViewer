@@ -1,7 +1,5 @@
 package dmitroserdun.com.ua.hubviewer.repository;
 
-import android.support.annotation.NonNull;
-
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
@@ -11,6 +9,8 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
+import dmitroserdun.com.ua.hubviewer.repository.callback.Action0;
+import dmitroserdun.com.ua.hubviewer.repository.callback.Action1;
 
 /**
  * Created by User on 17.08.2017.
@@ -18,35 +18,27 @@ import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 
 public interface GitHubDataSource {
 
-    interface Callback<T> {
-
-        void onLoaded(T o);
-
-    }
 
     interface CallbackError {
-        void onFailure(String failure);
     }
 
-    void onFailureDetect(CallbackError callbackError);
+    void authentication(String login, String password, Action1<Authorization> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void authentication(String login, String password, @NonNull Callback<Authorization> callback);
+    void getCurrentUser(String token,Action1<User> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getCurrentUser(String token, @NonNull Callback<User> callback);
+    void getUser(String username, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getUser(String username, @NonNull Callback<User> callback);
+    void getCurrentUserRepositories(String token,Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getCurrentUserRepositories(String token, @NonNull Callback<List<Repository>> callback);
+    void getRepositories(String username,Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getRepositories(String username, @NonNull Callback<List<Repository>> callback);
+    void getDetailsRepositories(String username,String reponame, Action1<RepositoryDetails> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getDetailsRepositories(String username, String reponame, @NonNull Callback<RepositoryDetails> callback);
+    void searchRepository(String name, Action1<Page> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void searchRepository(String name, @NonNull Callback<Page> callback);
+    void getContentForDirectory(String name, String reponame, String path, Action1<List<Directory>> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getContentForDirectory(String name, String reponame, String path, @NonNull Callback<List<Directory>> call);
-
-    void getUserEvents(String username, @NonNull Callback<List<Event>> callback);
+    void getUserEvents(String username, Action1<List<Event>> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void refreshLocalData();
 }

@@ -33,10 +33,18 @@ public class UserRepositoryListPresenter implements RepositoryListContract.Prese
     public void loadRepository() {
         // TODO: 19.08.2017 Handle the Failure
         if (username.isEmpty()) {
-            managerGitHubDataSource.getCurrentUserRepositories(getToken(), repo -> view.showRepository(repo));
+            managerGitHubDataSource.getCurrentUserRepositories(getToken(), repo -> {
+                view.showRepository(repo);
+            }, t -> {
+            }, () -> {
+            });
         } else {
             managerGitHubDataSource.refreshLocalData();
-            managerGitHubDataSource.getRepositories(username, repo -> view.showRepository(repo));
+            managerGitHubDataSource.getRepositories(username, repo -> {
+                view.showRepository(repo);
+            }, t -> {
+            }, () -> {
+            });
         }
 
     }
@@ -51,7 +59,6 @@ public class UserRepositoryListPresenter implements RepositoryListContract.Prese
         view.openRepositoryDetails(repository);
 
     }
-
 
 
     private String getToken() {

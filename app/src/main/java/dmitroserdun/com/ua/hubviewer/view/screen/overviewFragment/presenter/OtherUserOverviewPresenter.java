@@ -1,5 +1,6 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.presenter;
 
+import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment.OverviewContract;
 
@@ -24,13 +25,24 @@ public class OtherUserOverviewPresenter implements OverviewContract.Presenter {
     @Override
     public void loadData() {
         view.showLoadingView("");
-        managerGitHubDataSource.getUser(username, user-> {
-                view.showOverviewData(user);
-            view.hideLoadingView();
+        managerGitHubDataSource.refreshLocalData();
+        managerGitHubDataSource.getUser(username, user -> {
+            view.showOverviewData(user);
+
+            managerGitHubDataSource.getUserEvents(user.getLogin(), events -> {
+                view.showUserEvents(events);
+
+            }, t -> {
+
+            }, () -> {
             });
 
-        managerGitHubDataSource.getUserEvents(username, events -> {
-            view.showUserEvents(events);
+        }, t -> {
+            view.showMessage(R.string.unknown_host);
+
+        }, () -> {
+            view.hideLoadingView();
+
         });
 
     }
