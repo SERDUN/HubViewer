@@ -37,7 +37,6 @@ public class UsersDetailsTabFragment extends Fragment {
 
 
     public UsersDetailsTabFragment() {
-        // Required empty public constructor
     }
 
     public static UsersDetailsTabFragment newInstance(String param_username) {

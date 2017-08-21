@@ -98,32 +98,10 @@ public class AuthorizationActivity extends AppCompatActivity implements View {
     private class MyCustomWebViewClient extends WebViewClient {
         @Override
         public void onPageFinished(WebView view, String url) {
-//            Log.d(TAG, "onPageFinished: "+url);
-//            t.setText(t.getText()+"::"+url);
             if (!url.contains("app://callback?code="))
                 hideLoadingView();
-
-
-//            if(url.contains("https://github.com/login/oauth/authorize?client_id=")){
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-//                    CookieManager.getInstance().removeAllCookies(null);
-//                    CookieManager.getInstance().flush();
-//                } else
-//                {
-//                    CookieSyncManager cookieSyncMngr=CookieSyncManager.createInstance(getBaseContext());
-//                    cookieSyncMngr.startSync();
-//                    CookieManager cookieManager=CookieManager.getInstance();
-//                    cookieManager.removeAllCookie();
-//                    cookieManager.removeSessionCookie();
-//                    cookieSyncMngr.stopSync();
-//                    cookieSyncMngr.sync();
-//                }
-//                presenter.logIn();
-
-            //}
             super.onPageFinished(view, url);
         }
-
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             showLoadingView("");
