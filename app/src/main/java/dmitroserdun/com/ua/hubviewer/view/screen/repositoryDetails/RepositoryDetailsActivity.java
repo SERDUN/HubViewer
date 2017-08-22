@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,13 +23,14 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
+import dmitroserdun.com.ua.hubviewer.view.customView.screenConnectionVerification.ActivityConnectionVerification;
 import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 import dmitroserdun.com.ua.hubviewer.view.screen.containers.OtherUserDetailsActivity;
 import dmitroserdun.com.ua.hubviewer.view.screen.contentRepository.ContentRepositoryFragment;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 
-public class RepositoryDetailsActivity extends AppCompatActivity implements RepositoryDetailsContract.View,
+public class RepositoryDetailsActivity extends ActivityConnectionVerification implements RepositoryDetailsContract.View,
         ContentRepositoryFragment.CallbackOpenDir {
 
     public final String CONTENT_BACK_STACK_KEY = "fragment_back_content_key";
@@ -56,7 +56,7 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
     private RepositoryDetailsContract.Presenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
         initView();
@@ -67,6 +67,11 @@ public class RepositoryDetailsActivity extends AppCompatActivity implements Repo
         new RepositoryDetailsPresenter(this, Injection.provideTasksRepository(this),
                 getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE),
                 repository);
+        presenter.loadDetails();
+    }
+
+    @Override
+    public void restorationAccessInternet() {
         presenter.loadDetails();
     }
 

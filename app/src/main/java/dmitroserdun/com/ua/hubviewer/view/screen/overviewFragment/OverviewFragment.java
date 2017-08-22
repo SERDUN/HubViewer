@@ -21,7 +21,7 @@ import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.view.adapter.EventsListAdapter;
-import dmitroserdun.com.ua.hubviewer.view.customView.FragmentConnectionVerification;
+import dmitroserdun.com.ua.hubviewer.view.customView.screenConnectionVerification.FragmentConnectionVerification;
 import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
 import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 

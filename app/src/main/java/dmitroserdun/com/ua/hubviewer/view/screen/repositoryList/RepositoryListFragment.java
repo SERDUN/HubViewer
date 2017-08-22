@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -24,18 +23,16 @@ import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.view.adapter.RecyclerListAdapter;
+import dmitroserdun.com.ua.hubviewer.view.customView.screenConnectionVerification.FragmentConnectionVerification;
 import dmitroserdun.com.ua.hubviewer.view.customView.RecyclerViewEmptySupport;
 import dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails.RepositoryDetailsActivity;
 
 
-public class RepositoryListFragment extends Fragment implements RepositoryListContract.View {
+public class RepositoryListFragment extends FragmentConnectionVerification implements RepositoryListContract.View {
     public static final String REPOSITORY_LIST_FRAGMENT_KEY = RepositoryListFragment.class.getName();
 
 
     private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
     private String mParam2;
 
 
@@ -68,6 +65,11 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
     }
 
     @Override
+    public void restorationAccessInternet() {
+        presenter.loadRepository();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repository_list, container, false);
@@ -82,7 +84,9 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
         emptyView = view.findViewById(R.id.tv_empty);
         recyclerView.setEmptyView(emptyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecyclerListAdapter adapter= new RecyclerListAdapter(v -> {presenter.openRepositoryDetails(v);},
+        RecyclerListAdapter adapter = new RecyclerListAdapter(v -> {
+            presenter.openRepositoryDetails(v);
+        },
                 new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
@@ -141,8 +145,6 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
 
         SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
 
-//        search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -150,16 +152,15 @@ public class RepositoryListFragment extends Fragment implements RepositoryListCo
                 return false;
             }
 
-            // TODO: 20.08.2017 FIX bag search
             @Override
             public boolean onQueryTextChange(String newText) {
                 presenter.search(newText);
-                Log.d("search_sss", "onQueryTextSubmit: " + newText);
 
                 return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
 }

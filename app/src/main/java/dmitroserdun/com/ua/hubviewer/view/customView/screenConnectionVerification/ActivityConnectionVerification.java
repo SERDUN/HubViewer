@@ -1,20 +1,20 @@
-package dmitroserdun.com.ua.hubviewer.view.customView;
+package dmitroserdun.com.ua.hubviewer.view.customView.screenConnectionVerification;
 
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import dmitroserdun.com.ua.hubviewer.network.NetworkStateReceiver;
+import dmitroserdun.com.ua.hubviewer.view.customView.NoConnectionDialog;
 
 /**
  * Created by User on 22.08.2017.
  */
 
-public abstract class FragmentConnectionVerification extends Fragment implements NetworkStateReceiver.NetworkStateReceiverListener {
-
-
+public abstract  class ActivityConnectionVerification extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener {
     private NetworkStateReceiver networkStateReceiver;
+    private final String TAG_FRAGMENT_DIALOG="no_connection";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public abstract class FragmentConnectionVerification extends Fragment implements
     private void initListens() {
         networkStateReceiver = new NetworkStateReceiver();
         networkStateReceiver.addListener(this);
-        this.getContext().registerReceiver(networkStateReceiver,
+        registerReceiver(networkStateReceiver,
                 new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
     }
@@ -43,15 +43,17 @@ public abstract class FragmentConnectionVerification extends Fragment implements
     @Override
     public void networkUnavailable() {
         noConnectionDialog = NoConnectionDialog.newInstance();
-        noConnectionDialog.show(getChildFragmentManager(), "no_connection");
+        noConnectionDialog.show(getSupportFragmentManager(), TAG_FRAGMENT_DIALOG);
 
     }
 
     public abstract void restorationAccessInternet();
 
+
     @Override
-    public void onDestroy() {
+    public void onPause() {
         networkStateReceiver.removeListener(this);
-        super.onDestroy();
+        super.onPause();
     }
+
 }
