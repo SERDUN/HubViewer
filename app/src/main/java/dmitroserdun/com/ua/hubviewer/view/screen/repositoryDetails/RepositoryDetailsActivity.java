@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
 
     private View cvRepoDetailUser;
     private LoadingView loadingView;
-
+    private Toolbar toolbar;
 
     private RepositoryDetailsContract.Presenter presenter;
 
@@ -67,16 +68,16 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
         new RepositoryDetailsPresenter(this, Injection.provideTasksRepository(this),
                 getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE),
                 repository);
-        presenter.loadDetails();
     }
 
     @Override
     public void restorationAccessInternet() {
-        presenter.loadDetails();
+        if (presenter.getContent() == null)
+            presenter.loadDetails();
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_repo_detail);
+        toolbar = (Toolbar) findViewById(R.id.tb_repo_detail);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -176,6 +177,7 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
 
     @Override
     public void showRepoDetails(RepositoryDetails repositoryDetails) {
+        if (toolbar != null) toolbar.setTitle(repositoryDetails.getOwner().getLogin());
         tvLogin.setText(repositoryDetails.getOwner().getLogin());
         tvPath.setText(repositoryDetails.getFullName());
 
@@ -203,9 +205,11 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
 
     @Override
     public void openDirectory(Directory directory) {
+
+        Log.d("clic_next_content", "openDirectory: " + getSupportFragmentManager().getBackStackEntryCount());
+
         getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
                 .findFragmentById(R.id.container_content_repo)).commit();
-
 
         presenter.loadRepositoryContent(directory.getPath());
     }

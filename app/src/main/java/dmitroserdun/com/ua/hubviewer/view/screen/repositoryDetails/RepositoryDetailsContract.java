@@ -33,5 +33,7 @@ public class RepositoryDetailsContract {
 
         public void loadDetails();
 
+        public List<Directory> getContent();
+
     }
 }

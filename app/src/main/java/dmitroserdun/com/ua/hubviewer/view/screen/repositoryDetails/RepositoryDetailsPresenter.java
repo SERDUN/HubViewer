@@ -1,7 +1,11 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import java.util.List;
+
+import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.user.Owner;
 import dmitroserdun.com.ua.hubviewer.repository.ManagerGitHubDataSource;
@@ -15,6 +19,7 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
     private ManagerGitHubDataSource managerGitHubDataSource;
     private SharedPreferences pref;
     private Repository repository;
+    private List<Directory> content;
 
     public RepositoryDetailsPresenter(RepositoryDetailsContract.View view,
                                       ManagerGitHubDataSource managerGitHubDataSource,
@@ -33,8 +38,11 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
 
     @Override
     public void loadRepositoryContent(String path) {
+        Log.d("clic_next_content", "loadRepositoryContent: ");
         managerGitHubDataSource.getContentForDirectory(repository.getOwner().getLogin(), repository.getName(), path, content -> {
+            this.content = content;
             view.showContent(content);
+
         }, t -> {
         }, () -> {
             view.hideLoadingView();
@@ -53,6 +61,11 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
         );
 
 
+    }
+
+    @Override
+    public List<Directory> getContent() {
+        return content;
     }
 
 
