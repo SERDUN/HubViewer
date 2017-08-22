@@ -1,5 +1,6 @@
 package dmitroserdun.com.ua.hubviewer.repository.remote;
 
+import java.io.IOException;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.data.model.Authorization;
@@ -14,7 +15,9 @@ import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.callback.Action0;
 import dmitroserdun.com.ua.hubviewer.repository.callback.Action1;
 import dmitroserdun.com.ua.hubviewer.utils.BasicAuthUtils;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -198,6 +201,27 @@ public class RemoteGitHubDataSource implements GitHubDataSource {
             }
         });
 
+    }
+
+    @Override
+    public void loadFile(String url, Action1<byte[]> onSuccess, Action1 onFailure, Action0 onComplete) {
+        GitGubNetworkFactory.getService().downloadFile(url).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    onSuccess.call(response.body().bytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                onComplete.call();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                onFailure.call(t);
+                onComplete.call();
+            }
+        });
     }
 
     @Override

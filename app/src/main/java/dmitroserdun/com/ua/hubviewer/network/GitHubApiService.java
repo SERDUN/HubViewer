@@ -11,6 +11,7 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,6 +19,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * Created by User on 17.08.2017.
@@ -53,5 +55,10 @@ public interface GitHubApiService {
 
     @GET("/users/{username}/events")
     public Call<List<Event>> getUserEvent(@Path("username") String username);
+
+
+    @GET
+    public Call<ResponseBody> downloadFile(@Url String fileUrl);
+
 
 }

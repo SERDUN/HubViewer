@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "URL", '"https://api.github.com"'
         buildConfigField "String", "BASE_URL", '"https://github.com"'
+        buildConfigField "String", "RAW_URL", '"https://raw.githubusercontent.com/"'
         buildConfigField "String", "CLIENT_ID", '"5dae924e2fd3962fca2b"'
         buildConfigField "String", "CLIENT_SECRET", '"779179b78a254633be3dd1a201d2afd8d9505a7e"'
         jackOptions {

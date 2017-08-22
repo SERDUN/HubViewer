@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.screen.repositoryList.RepositoryListFragment">
+    tools:context=".activity.screen.repositoryList.RepositoryListFragment">
 
 
-    <dmitroserdun.com.ua.hubviewer.view.customView.RecyclerViewEmptySupport
+    <dmitroserdun.com.ua.hubviewer.activity.customView.RecyclerViewEmptySupport
         android:id="@+id/rv_repository"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -77,6 +77,11 @@ public class LocalGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
+    public void loadFile(String url, Action1<byte[]> onSuccess, Action1 onFailure, Action0 onComplete) {
+
+    }
+
+    @Override
     public void refreshLocalData() {
 
     }

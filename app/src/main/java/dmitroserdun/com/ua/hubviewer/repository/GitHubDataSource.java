@@ -24,21 +24,23 @@ public interface GitHubDataSource {
 
     void authentication(String login, String password, Action1<Authorization> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getCurrentUser(String token,Action1<User> onSuccess, Action1 onFailure, Action0 onComplete);
+    void getCurrentUser(String token, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void getUser(String username, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getCurrentUserRepositories(String token,Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
+    void getCurrentUserRepositories(String token, Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getRepositories(String username,Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
+    void getRepositories(String username, Action1<List<Repository>> onSuccess, Action1 onFailure, Action0 onComplete);
 
-    void getDetailsRepositories(String username,String reponame, Action1<RepositoryDetails> onSuccess, Action1 onFailure, Action0 onComplete);
+    void getDetailsRepositories(String username, String reponame, Action1<RepositoryDetails> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void searchRepository(String name, Action1<Page> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void getContentForDirectory(String name, String reponame, String path, Action1<List<Directory>> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void getUserEvents(String username, Action1<List<Event>> onSuccess, Action1 onFailure, Action0 onComplete);
+
+    void loadFile(String url, Action1<byte[]> onSuccess, Action1 onFailure, Action0 onComplete);
 
     void refreshLocalData();
 }

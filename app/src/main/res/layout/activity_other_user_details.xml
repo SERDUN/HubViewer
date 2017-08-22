@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="dmitroserdun.com.ua.hubviewer.view.screen.containers.OtherUserDetailsActivity">
+    tools:context="dmitroserdun.com.ua.hubviewer.activity.screen.containers.OtherUserDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_user_detail"

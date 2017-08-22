@@ -14,18 +14,18 @@
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".view.screen.containers.NavigationActivity"
+            android:name=".activity.screen.containers.NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.screen.authActivity.AuthorizationActivity">
+        <activity android:name=".activity.screen.authActivity.AuthorizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.screen.repositoryDetails.RepositoryDetailsActivity" />
-        <activity android:name=".view.screen.containers.OtherUserDetailsActivity"></activity>
+        <activity android:name=".activity.screen.repositoryDetailsContent.RepositoryDetailsActivity" />
+        <activity android:name=".activity.screen.containers.OtherUserDetailsActivity"></activity>
 
         <provider
             android:name=".data.provider.HubProvider"

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="dmitroserdun.com.ua.hubviewer.view.screen.repositoryDetails.RepositoryDetailsActivity">
+        tools:context="dmitroserdun.com.ua.hubviewer.activity.screen.repositoryDetailsContent.RepositoryDetailsActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tb_repo_detail"

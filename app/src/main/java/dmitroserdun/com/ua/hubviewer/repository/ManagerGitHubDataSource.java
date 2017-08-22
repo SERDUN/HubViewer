@@ -104,6 +104,11 @@ public class ManagerGitHubDataSource implements GitHubDataSource {
     }
 
     @Override
+    public void loadFile(String url, Action1<byte[]> onSuccess, Action1 onFailure, Action0 onComplete) {
+        remoteRepository.loadFile(url, onSuccess, onFailure, onComplete);
+    }
+
+    @Override
     public void refreshLocalData() {
         useRemoteDataSource = true;
 

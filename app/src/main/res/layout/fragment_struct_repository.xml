@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="dmitroserdun.com.ua.hubviewer.view.screen.contentRepository.ContentRepositoryFragment">
+    tools:context="dmitroserdun.com.ua.hubviewer.activity.screen.contentRepository.ContentRepositoryFragment">
 
 
 
