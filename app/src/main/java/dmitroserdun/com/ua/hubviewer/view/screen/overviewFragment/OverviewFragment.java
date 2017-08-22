@@ -1,8 +1,6 @@
 package dmitroserdun.com.ua.hubviewer.view.screen.overviewFragment;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,13 +21,12 @@ import dmitroserdun.com.ua.hubviewer.R;
 import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.view.adapter.EventsListAdapter;
+import dmitroserdun.com.ua.hubviewer.view.customView.FragmentConnectionVerification;
 import dmitroserdun.com.ua.hubviewer.view.customView.LoadingDialog;
 import dmitroserdun.com.ua.hubviewer.view.screen.LoadingView;
 
 
-public class OverviewFragment extends Fragment implements OverviewContract.View {
-
-
+public class OverviewFragment extends FragmentConnectionVerification implements OverviewContract.View{
     public static final String OVERVIEW_FRAGMENT_KEY = OverviewFragment.class.getName();
 
     private static final String ARG_PARAM1 = "param1";
@@ -51,7 +48,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
     private OverviewContract.Presenter presenter;
     private RecyclerView recyclerView;
     private LoadingView loadingView;
@@ -82,6 +78,11 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     }
 
     @Override
+    public void restorationAccessInternet() {
+        presenter.loadData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
@@ -89,6 +90,8 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
         presenter.loadData();
         return view;
     }
+
+
 
     private void initView(View view) {
         toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -139,7 +142,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     @Override
     public void showMessage(int msg) {
 
-        Toast.makeText(getContext(),getString(msg), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(msg), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -158,7 +161,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
         tvCountRepository.setText(String.valueOf(user.getPublicRepos()));
         tvCountFollowers.setText(String.valueOf(user.getFollowers()));
         tvCountFollowing.setText(String.valueOf(user.getFollowing()));
-
+        tvFullName.setFocusable(true);
 
         tvLogin.setText(user.getLogin());
         tvFullName.setText(user.getName());
@@ -173,18 +176,8 @@ public class OverviewFragment extends Fragment implements OverviewContract.View 
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
+
+
+
 }

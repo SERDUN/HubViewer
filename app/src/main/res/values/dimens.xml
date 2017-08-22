@@ -16,6 +16,8 @@
     <dimen name="custom_tab_layout_height">72dp</dimen>
     <dimen name="small_text_size">8sp</dimen>
     <dimen name="normal_text_size">16sp</dimen>
+    <dimen name="big_text_size">22sp</dimen>
+
 
 
 </resources>

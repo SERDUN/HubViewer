@@ -50,6 +50,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
         if(connected == true)
             listener.networkAvailable();
+
         else
             listener.networkUnavailable();
     }
