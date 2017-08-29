@@ -74,7 +74,7 @@ public class User {
     private String email;
     @SerializedName("hireable")
     @Expose
-    private Object hireable;
+    private String hireable;
     @SerializedName("bio")
     @Expose
     private String bio;
@@ -277,7 +277,7 @@ public class User {
         return hireable;
     }
 
-    public void setHireable(Object hireable) {
+    public void setHireable(String hireable) {
         this.hireable = hireable;
     }
 

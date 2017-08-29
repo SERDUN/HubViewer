@@ -19,7 +19,6 @@ import java.util.HashMap;
 
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 
-import static dmitroserdun.com.ua.hubviewer.data.provider.ContractClass.Event.KEY_FK_CLASS_ID;
 import static dmitroserdun.com.ua.hubviewer.data.provider.ContractClass.Overview.COLUMN_NAME_ID;
 
 /**
@@ -211,9 +210,8 @@ public class HubProvider extends ContentProvider {
         }
 
 
-
         return rowUri;
-}
+    }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[]
@@ -265,77 +263,78 @@ public class HubProvider extends ContentProvider {
         return count;
     }
 
-private static class DatabaseHelper extends SQLiteOpenHelper {
-    //// TODO: 09.08.2017 create const helper
-    private static final String DATABASE_NAME = "NewsDatabase";
-    public static final String DATABASE_TABLE_USERS = ContractClass.Overview.TABLE_NAME;
-    public static final String DATABASE_TABLE_EVENTS = ContractClass.Event.TABLE_NAME;
-    public static final String KEY_ROWID = "_id";
-    private static final String DATABASE_CREATE_TABLE_USER =
-            "create table " + DATABASE_TABLE_USERS + " ("
-                    + KEY_ROWID + " integer primary key autoincrement, "
-                    + ContractClass.Overview.COLUMN_NAME_LOGIN + " string , "
-                    + COLUMN_NAME_ID + " integer , "
-                    + ContractClass.Overview.COLUMN_NAME_AVATAR_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_GRAWATAR_ID + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_HTML_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_FOLLOWERS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_FOLLOWING_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_GISTS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_STARRED_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_SUBSCRIPTIONS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_ORGANIZATIONS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_REPOS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_EVENTS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_RECEIVED_EVENTS_URL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_TYPE + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_SITE_ADMIN + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_NAME + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_COMPANY + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_BLOG + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_LOCATION + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_EMAIL + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_HIREABLE + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_BIO + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_PUBLIC_REPOS + " integer , "
-                    + ContractClass.Overview.COLUMN_NAME_PUBLIC_GISTS + " integer , "
-                    + ContractClass.Overview.COLUMN_NAME_FOLLOWERS + " integer , "
-                    + ContractClass.Overview.COLUMN_NAME_FOLLOWING + " integer , "
-                    + ContractClass.Overview.COLUMN_NAME_CREATED_AT + " string , "
-                    + ContractClass.Overview.COLUMN_NAME_UPDATE_AT + " string , "
-                    + " UNIQUE ( " + COLUMN_NAME_ID + " ) ON CONFLICT IGNORE" + ");";
+    private static class DatabaseHelper extends SQLiteOpenHelper {
+        //// TODO: 09.08.2017 create const helper
+        private static final String DATABASE_NAME = "NewsDatabase";
+        public static final String DATABASE_TABLE_USERS = ContractClass.Overview.TABLE_NAME;
+        public static final String DATABASE_TABLE_EVENTS = ContractClass.Event.TABLE_NAME;
+        public static final String KEY_ROWID = "_id";
+        private static final String DATABASE_CREATE_TABLE_USER =
+                "create table " + DATABASE_TABLE_USERS + " ("
+                        + KEY_ROWID + " integer primary key autoincrement, "
+                        + ContractClass.Overview.COLUMN_NAME_LOGIN + " string , "
+                        + COLUMN_NAME_ID + " integer , "
+                        + ContractClass.Overview.COLUMN_NAME_AVATAR_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_GRAWATAR_ID + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_HTML_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_FOLLOWERS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_FOLLOWING_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_GISTS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_STARRED_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_SUBSCRIPTIONS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_ORGANIZATIONS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_REPOS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_EVENTS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_RECEIVED_EVENTS_URL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_TYPE + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_SITE_ADMIN + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_NAME + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_COMPANY + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_BLOG + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_LOCATION + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_EMAIL + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_HIREABLE + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_BIO + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_PUBLIC_REPOS + " integer , "
+                        + ContractClass.Overview.COLUMN_NAME_PUBLIC_GISTS + " integer , "
+                        + ContractClass.Overview.COLUMN_NAME_FOLLOWERS + " integer , "
+                        + ContractClass.Overview.COLUMN_NAME_FOLLOWING + " integer , "
+                        + ContractClass.Overview.COLUMN_NAME_CREATED_AT + " string , "
+                        + ContractClass.Overview.COLUMN_NAME_UPDATE_AT + " string , "
+                        + " UNIQUE ( " + COLUMN_NAME_ID + " ) ON CONFLICT IGNORE" + ");";
 
-    private static final String DATABASE_CREATE_TABLE_EVENTS =
-            "create table " + DATABASE_TABLE_EVENTS + " ("
-                    + KEY_ROWID + " integer primary key autoincrement, "
-                    + ContractClass.Event.COLUMN_NAME_EVENT + " string default '', "
-                    + ContractClass.Event.COLUMN_NAME_ACTOR + " string default '', "
-                    + ContractClass.Event.COLUMN_NAME_REPO + "  string default 0, "
-                    + KEY_FK_CLASS_ID + " integer, "
-                    + " foreign key (" + KEY_FK_CLASS_ID + ") references " + DATABASE_TABLE_USERS + "(" + COLUMN_NAME_ID + "));";
+        private static final String DATABASE_CREATE_TABLE_EVENTS =
+                "create table " + DATABASE_TABLE_EVENTS + " ("
+                        + KEY_ROWID + " integer primary key autoincrement, "
+                        + ContractClass.Event.COLUMN_NAME_EVENT + " string default '', "
+                        + ContractClass.Event.COLUMN_NAME_ACTOR + " string default '', "
+                        + ContractClass.Event.COLUMN_NAME_REPO + "  string default 0, "
+                        + ContractClass.Event.KEY_FK_USER_ID + " integer default -1 "
+                        //   + " foreign key (" + KEY_FK_USER_ID + ") references " + DATABASE_TABLE_USERS + "(" + COLUMN_NAME_ID + "));";
+                        + ");";
 
 
-    private Context ctx;
+        private Context ctx;
 
-    DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        ctx = context;
+        DatabaseHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            ctx = context;
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(DATABASE_CREATE_TABLE_USER);
+            db.execSQL(DATABASE_CREATE_TABLE_EVENTS);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_USERS);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_EVENTS);
+            onCreate(db);
+        }
     }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE_TABLE_USER);
-        db.execSQL(DATABASE_CREATE_TABLE_EVENTS);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_EVENTS);
-        onCreate(db);
-    }
-}
 
 }

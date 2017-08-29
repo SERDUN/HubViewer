@@ -96,8 +96,6 @@ public class ContractClass {
                 ContractClass.Overview.COLUMN_NAME_CREATED_AT,
                 ContractClass.Overview.COLUMN_NAME_UPDATE_AT
         };
-
-
     }
 
 
@@ -119,9 +117,7 @@ public class ContractClass {
         public static final String COLUMN_NAME_EVENT = "type";
         public static final String COLUMN_NAME_ACTOR = "login";
         public static final String COLUMN_NAME_REPO = "full_name";
-
-
-        public static final String KEY_FK_CLASS_ID = "fk_user_id";
+        public static final String KEY_FK_USER_ID = "fk_user_id";
 
 
         public static final int ID_PATH_POSITION = 1;
@@ -131,6 +127,7 @@ public class ContractClass {
                 ContractClass.Event.COLUMN_NAME_EVENT,
                 ContractClass.Event.COLUMN_NAME_ACTOR,
                 ContractClass.Event.COLUMN_NAME_REPO,
+                ContractClass.Event.KEY_FK_USER_ID
 
         };
 

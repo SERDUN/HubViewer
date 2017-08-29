@@ -1,6 +1,7 @@
 package dmitroserdun.com.ua.hubviewer.activity.screen.repositoryDetailsContent;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.List;
 
@@ -46,8 +47,11 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
         }
 
         if (currentContent.getType().equals(TYPE_DIR)) {
+            Log.d("clic_next_content", "DIR: ");
+
             loadDirectory(currentContent.getPath());
         } else {
+            Log.d("clic_next_content", "FILE->"+currentContent.getDownloadUrl());
             loadFile(currentContent.getDownloadUrl());
         }
 
@@ -84,6 +88,7 @@ public class RepositoryDetailsPresenter implements RepositoryDetailsContract.Pre
 
     private void loadFile(String url) {
         managerGitHubDataSource.loadFile(url, data -> {
+            Log.d("clic_next_content", "FILE-> good"+data);
             view.showFileDetails(new String(data));
         }, t -> {
         }, () -> {

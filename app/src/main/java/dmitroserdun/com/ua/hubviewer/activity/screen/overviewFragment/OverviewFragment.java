@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
-import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
-import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 import dmitroserdun.com.ua.hubviewer.activity.adapter.EventsListAdapter;
 import dmitroserdun.com.ua.hubviewer.activity.customView.LoadingDialog;
 import dmitroserdun.com.ua.hubviewer.activity.customView.screenConnectionVerification.FragmentConnectionVerification;
 import dmitroserdun.com.ua.hubviewer.activity.screen.LoadingView;
+import dmitroserdun.com.ua.hubviewer.data.model.events.Event;
+import dmitroserdun.com.ua.hubviewer.data.model.user.User;
 
 
 public class OverviewFragment extends FragmentConnectionVerification implements OverviewContract.View {
@@ -165,6 +165,15 @@ public class OverviewFragment extends FragmentConnectionVerification implements 
         tvLogin.setText(user.getLogin());
         tvFullName.setText(user.getName());
         Picasso.with(getContext()).load(user.getAvatarUrl()).into(ivAvatar);
+        ///test
+//        Cursor cur = getContext().getContentResolver().query(
+//                ContractClass.Overview.CONTENT_URI,
+//                ContractClass.Overview.DEFAULT_PROJECTION,
+//                null, null,
+//                null);
+//
+//        ModelHelper.generateModelFromCursor(cur);
+
 
 
     }

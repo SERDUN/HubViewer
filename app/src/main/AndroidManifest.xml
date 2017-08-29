@@ -13,10 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".activity.screen.containers.NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.screen.authActivity.AuthorizationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +22,8 @@
         </activity>
         <activity android:name=".activity.screen.repositoryDetailsContent.RepositoryDetailsActivity" />
         <activity android:name=".activity.screen.containers.OtherUserDetailsActivity"></activity>
+        <activity android:name=".activity.screen.containers.NavigationActivity"></activity>
+
 
         <provider
             android:name=".data.provider.HubProvider"

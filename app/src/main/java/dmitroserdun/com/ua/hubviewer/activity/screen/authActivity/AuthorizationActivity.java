@@ -11,12 +11,12 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import dmitroserdun.com.ua.hubviewer.R;
+import dmitroserdun.com.ua.hubviewer.activity.customView.LoadingDialog;
 import dmitroserdun.com.ua.hubviewer.activity.screen.LoadingView;
 import dmitroserdun.com.ua.hubviewer.activity.screen.authActivity.AuthorizationContract.View;
 import dmitroserdun.com.ua.hubviewer.activity.screen.containers.NavigationActivity;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
 import dmitroserdun.com.ua.hubviewer.utils.OauthUtils;
-import dmitroserdun.com.ua.hubviewer.activity.customView.LoadingDialog;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 

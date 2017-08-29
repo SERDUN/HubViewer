@@ -1,6 +1,9 @@
 package dmitroserdun.com.ua.hubviewer.repository.local;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
 
 import java.util.List;
 
@@ -11,6 +14,7 @@ import dmitroserdun.com.ua.hubviewer.data.model.repository.Page;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.data.model.user.User;
+import dmitroserdun.com.ua.hubviewer.data.provider.ContractClass;
 import dmitroserdun.com.ua.hubviewer.repository.GitHubDataSource;
 import dmitroserdun.com.ua.hubviewer.repository.callback.Action0;
 import dmitroserdun.com.ua.hubviewer.repository.callback.Action1;
@@ -21,15 +25,20 @@ import dmitroserdun.com.ua.hubviewer.repository.callback.Action1;
 
 public class LocalGitHubDataSource implements GitHubDataSource {
     private static LocalGitHubDataSource INSTANCE = null;
-
+    private ContentResolver contentResolver;
     public static LocalGitHubDataSource getInstance(Context context) {
         //use context for database
         if (INSTANCE == null) {
-            INSTANCE = new LocalGitHubDataSource();
+            INSTANCE = new LocalGitHubDataSource(context.getContentResolver());
+
         }
+
         return INSTANCE;
     }
 
+    public LocalGitHubDataSource(ContentResolver contentResolver) {
+        this.contentResolver = contentResolver;
+    }
 
     @Override
     public void authentication(String login, String password, Action1<Authorization> onSuccess, Action1 onFailure, Action0 onComplete) {
@@ -38,6 +47,13 @@ public class LocalGitHubDataSource implements GitHubDataSource {
 
     @Override
     public void getCurrentUser(String token, Action1<User> onSuccess, Action1 onFailure, Action0 onComplete) {
+        Cursor cur = contentResolver.query(
+                ContractClass.Event.CONTENT_URI,
+                ContractClass.Event.DEFAULT_PROJECTION,
+                null,
+                null,
+                null);
+
 
     }
 

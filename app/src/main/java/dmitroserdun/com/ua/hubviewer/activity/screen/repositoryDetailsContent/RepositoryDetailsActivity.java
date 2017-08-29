@@ -18,17 +18,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import dmitroserdun.com.ua.hubviewer.R;
+import dmitroserdun.com.ua.hubviewer.activity.customView.LoadingDialog;
+import dmitroserdun.com.ua.hubviewer.activity.customView.screenConnectionVerification.ActivityConnectionVerification;
+import dmitroserdun.com.ua.hubviewer.activity.screen.LoadingView;
+import dmitroserdun.com.ua.hubviewer.activity.screen.containers.OtherUserDetailsActivity;
+import dmitroserdun.com.ua.hubviewer.activity.screen.contentRepository.ContentRepositoryFragment;
 import dmitroserdun.com.ua.hubviewer.activity.screen.repositoryDetailsFile.DetailsFileFragment;
 import dmitroserdun.com.ua.hubviewer.data.model.directory.Directory;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.Repository;
 import dmitroserdun.com.ua.hubviewer.data.model.repository.RepositoryDetails;
 import dmitroserdun.com.ua.hubviewer.utils.Constance;
 import dmitroserdun.com.ua.hubviewer.utils.Injection;
-import dmitroserdun.com.ua.hubviewer.activity.customView.LoadingDialog;
-import dmitroserdun.com.ua.hubviewer.activity.customView.screenConnectionVerification.ActivityConnectionVerification;
-import dmitroserdun.com.ua.hubviewer.activity.screen.LoadingView;
-import dmitroserdun.com.ua.hubviewer.activity.screen.containers.OtherUserDetailsActivity;
-import dmitroserdun.com.ua.hubviewer.activity.screen.contentRepository.ContentRepositoryFragment;
 
 import static dmitroserdun.com.ua.hubviewer.utils.Constance.TOKEN_KEY;
 
@@ -198,12 +198,16 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
 
     @Override
     public void showFileDetails(String text) {
+        Log.d("clic_next_content", "details file-> : " + text);
+
         addFragment(DetailsFileFragment.newInstance(text),
                 ContentRepositoryFragment.CONTENT_REPOSITORY_FRAGMENT_KEY);
 
     }
 
     private void addFragment(Fragment fragment, String fragmentKey) {
+        Log.d("clic_next_content", "openDirectory: " + getSupportFragmentManager().getBackStackEntryCount());
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container_content_repo, fragment, fragmentKey)
                 .addToBackStack(CONTENT_BACK_STACK_KEY)
@@ -214,7 +218,6 @@ public class RepositoryDetailsActivity extends ActivityConnectionVerification im
     @Override
     public void openDirectory(Directory directory) {
 
-        Log.d("clic_next_content", "openDirectory: " + getSupportFragmentManager().getBackStackEntryCount());
 
         getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
                 .findFragmentById(R.id.container_content_repo)).commit();

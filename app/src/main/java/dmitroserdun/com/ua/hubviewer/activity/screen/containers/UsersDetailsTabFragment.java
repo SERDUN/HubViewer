@@ -82,7 +82,7 @@ public class UsersDetailsTabFragment extends Fragment {
 
         if (username.isEmpty()) {
             new CurrentUserOverviewPresenter(overviewFragment, Injection.provideTasksRepository(getContext()),
-                    sharedPreferences);
+                    sharedPreferences,getContext().getContentResolver());
 
         } else {
             new OtherUserOverviewPresenter(overviewFragment, Injection.provideTasksRepository(getContext()),
